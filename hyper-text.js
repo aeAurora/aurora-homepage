@@ -19,11 +19,6 @@
   }
 
   function play() {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      element.textContent = targetText();
-      return;
-    }
-
     window.clearInterval(timer);
     running = true;
     element.classList.add('is-scrambling');

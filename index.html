@@ -1473,12 +1473,10 @@
       items.forEach((item) => item.classList.add('visible'));
     }
 
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      window.addEventListener('pointermove', (event) => {
-        document.body.style.setProperty('--light-x', `${(event.clientX / window.innerWidth) * 100}%`);
-        document.body.style.setProperty('--light-y', `${(event.clientY / window.innerHeight) * 100}%`);
-      }, { passive:true });
-    }
+    window.addEventListener('pointermove', (event) => {
+      document.body.style.setProperty('--light-x', `${(event.clientX / window.innerWidth) * 100}%`);
+      document.body.style.setProperty('--light-y', `${(event.clientY / window.innerHeight) * 100}%`);
+    }, { passive:true });
 
     const avatarStage = document.getElementById('avatarStage');
     const avatarStatus = document.getElementById('avatarStatus');
@@ -1790,6 +1788,6 @@
   <script src="hyper-text.js"></script>
   <script src="scratch-avatar.js"></script>
   <script src="fluid-cursor.js"></script>
-  <script>FluidCursor.init({ Z_INDEX: 0, TRAIL_WIDTH: 8, GLOW: 8, DISSIPATION: 0.22, HUE_SPEED: 2.2, CLICK_BURST: 10 });</script>
+  <script>FluidCursor.init({ Z_INDEX: 0, TRAIL_WIDTH: 8, GLOW: 8, DISSIPATION: 0.22, HUE_SPEED: 2.2, CLICK_BURST: 10, RESPECT_MOTION: false });</script>
 </body>
 </html>
