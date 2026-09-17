@@ -1,0 +1,43 @@
+.hyper-name {
+  display: inline-block;
+  min-width: 3em;
+  margin: 0;
+  color: #f5f7fb;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  font: inherit;
+  font-size: 1em;
+  line-height: inherit;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: inherit;
+  filter: none;
+  cursor: default;
+  outline: none;
+  text-shadow:
+    -2px 0 rgba(114, 228, 224, .24),
+    2px 0 rgba(239, 143, 197, .2);
+}
+
+.hyper-name.is-scrambling {
+  color: #ffffff;
+  text-shadow:
+    -3px 0 rgba(114, 228, 224, .58),
+    3px 0 rgba(239, 143, 197, .48),
+    0 0 20px rgba(121, 207, 255, .22);
+}
+
+.hyper-name:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid rgba(114, 228, 224, .7);
+  outline-offset: 8px;
+}
+
+.hero-name-subtitle {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hyper-name { transition: none; }
+}
