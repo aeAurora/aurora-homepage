@@ -1,8 +1,8 @@
 /* Aurora Z·X·Y 空间坐标液态品牌标志 */
 .identity-logo {
   position: absolute;
-  right: 1.5%;
-  top: 8%;
+  right: clamp(88px, 7vw, 108px);
+  top: 3%;
   z-index: 10;
   width: clamp(138px, 13vw, 188px);
   aspect-ratio: 1;
