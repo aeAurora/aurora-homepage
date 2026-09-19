@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aurora 的 3D 建模作品展示，支持自由旋转与缩放查看。">
+  <title>构建自己的 3D 建模｜Aurora</title>
+  <link rel="stylesheet" href="model-studio.css?v=1.0.0">
+</head>
+<body>
+  <header class="studio-header">
+    <a class="brand" href="index.html#project" aria-label="返回项目与作品">AURORA <span>/ MODEL LAB</span></a>
+    <nav aria-label="页面导航">
+      <a href="index.html#project">返回作品</a>
+      <a class="model-two" href="index.html#top">模型 2 · 首页 3D 形象 ↑</a>
+    </nav>
+  </header>
+
+  <main class="studio-shell">
+    <section class="studio-copy" aria-labelledby="studioTitle">
+      <p class="eyebrow">WORK 02 / 3D MODELING</p>
+      <h1 id="studioTitle">构建自己的<br><span>3D 建模</span></h1>
+      <p class="intro">以建模师视角观察模型的轮廓、体积与细节。模型 1 可全方位旋转和缩放；模型 2 入口会返回首页顶部的互动 3D 形象。</p>
+      <dl class="model-meta">
+        <div><dt>MODEL</dt><dd>模型 1</dd></div>
+        <div><dt>VIEW</dt><dd>自由轨道</dd></div>
+        <div><dt>FORMAT</dt><dd>GLB</dd></div>
+      </dl>
+      <div class="instructions" aria-label="操作说明">
+        <span><b>旋转</b> 鼠标拖动 / 单指拖动</span>
+        <span><b>缩放</b> 滚轮 / 双指捏合</span>
+        <span><b>复位</b> 点击查看器右上角按钮</span>
+      </div>
+    </section>
+
+    <section class="viewer-panel" id="viewerPanel" aria-label="模型 1 三维查看器">
+      <div class="viewer-head">
+        <span>MODEL_01.GLB</span>
+        <div class="viewer-actions">
+          <button id="resetView" type="button">复位视角</button>
+          <button id="toggleFullscreen" type="button">全屏</button>
+        </div>
+      </div>
+      <div class="viewport" id="viewport">
+        <canvas id="modelCanvas" aria-label="可旋转缩放的模型 1"></canvas>
+        <div class="loading" id="modelLoading" role="status" aria-live="polite">
+          <span class="loading-ring"></span>
+          <strong>正在加载模型 1</strong>
+          <small id="loadingProgress">0%</small>
+        </div>
+        <div class="viewer-error" id="viewerError" hidden>
+          <strong>模型暂时无法加载</strong>
+          <span>请刷新页面后重试。</span>
+        </div>
+        <div class="axis-label" aria-hidden="true"><i class="axis-x">X</i><i class="axis-y">Y</i><i class="axis-z">Z</i></div>
+      </div>
+      <footer class="viewer-foot"><span>ORBIT VIEW / REAL-TIME</span><span id="modelStats">WAITING FOR MODEL</span></footer>
+    </section>
+  </main>
+
+  <a class="floating-model-two" href="index.html#top">模型 2 · 返回首页 3D 形象 ↑</a>
+  <script type="module" src="model-studio.js?v=1.0.0"></script>
+</body>
+</html>

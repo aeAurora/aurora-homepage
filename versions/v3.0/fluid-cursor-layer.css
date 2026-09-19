@@ -1,0 +1,6 @@
+/* Fluid Cursor 层级接入：Canvas 位于背景之上、正文之下 */
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}

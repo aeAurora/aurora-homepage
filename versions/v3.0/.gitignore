@@ -1,0 +1,10 @@
+# DeepWorks 本地临时文件
+.deepworks/
+
+# 系统和编辑器临时文件
+.DS_Store
+Thumbs.db
+*.log
+
+# supabase-config.js 使用公开的 Publishable key，静态部署必须包含该文件。
+# 禁止在项目中加入 sb_secret_、service_role、数据库密码或私钥。

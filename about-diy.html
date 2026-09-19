@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aurora 的手工制作与 DIY 图片档案。">
+  <title>Aurora｜动手实践</title>
+  <link rel="stylesheet" href="about-detail.css?v=1.1">
+  <link rel="stylesheet" href="interest-experiences.css?v=1.0">
+  <link rel="stylesheet" href="interest-ambient.css?v=2.0">
+</head>
+<body class="interest-diy">
+  <header class="topbar"><nav class="nav wrap" aria-label="页面导航"><a class="back" href="index.html#interests">返回兴趣坐标</a><a class="next-link" href="interest-stage.html">下一篇：舞台表现 →</a></nav></header>
+  <main class="diy-main">
+    <header class="hero wrap">
+      <div class="kicker">INTEREST / HANDS-ON · DIY ARCHIVE</div>
+      <h1>先规划，再动手。<br><span class="gradient-text">享受每一步成形。</span></h1>
+      <p class="lede">我对“动手做东西”的兴趣，最早来自实体手工制作。比起只看最终结果，我更享受材料经过一步步处理，从零散想法变成真实物件的过程。</p>
+      <div class="signal-row" aria-label="实践关键词"><span>实体手工</span><span>先规划再行动</span><span>享受制作过程</span><span>11 张记录</span></div>
+    </header>
+
+    <section class="badge-stage wrap" aria-labelledby="badgeTitle">
+      <button class="image-badge" id="imageBadge" type="button" aria-describedby="badgeHint" aria-label="打开完整 DIY 图片浏览">
+        <span class="badge-photo"><img src="assets/diy/diy-01.jpg" alt="DIY 图片预览 1"></span>
+        <span class="badge-photo"><img src="assets/diy/diy-06.jpg" alt="DIY 图片预览 2"></span>
+        <span class="badge-photo"><img src="assets/diy/diy-11.jpg" alt="DIY 图片预览 3"></span>
+        <span class="folder" aria-hidden="true"></span>
+        <span class="badge-hint" id="badgeHint">悬停展开图片 · 点击进入完整图库</span>
+      </button>
+      <h2 id="badgeTitle" hidden>DIY Images Badge</h2>
+    </section>
+
+    <section class="gallery-section wrap" id="gallery">
+      <div class="gallery-head"><div><div class="kicker">FULL IMAGE ARCHIVE</div><h2>完整图片浏览</h2></div><p>只保留作品本身。点击任意图片，可按原始比例查看完整画面。</p></div>
+      <div class="diy-gallery" id="diyGallery" aria-label="DIY 图片图库">
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-01.jpg" alt="DIY 作品图片 1" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-02.jpg" alt="DIY 作品图片 2" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-03.jpg" alt="DIY 作品图片 3" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-04.jpg" alt="DIY 作品图片 4" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-05.jpg" alt="DIY 作品图片 5" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-06.jpg" alt="DIY 作品图片 6" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-07.jpg" alt="DIY 作品图片 7" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-08.jpg" alt="DIY 作品图片 8" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-09.jpg" alt="DIY 作品图片 9" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-10.jpg" alt="DIY 作品图片 10" loading="lazy"></button>
+        <button class="gallery-button" type="button"><img src="assets/diy/diy-11.jpg" alt="DIY 作品图片 11" loading="lazy"></button>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="完整图片查看器" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭完整图片">×</button>
+    <img id="lightboxImage" src="assets/diy/diy-01.jpg" alt="完整 DIY 作品图片">
+    <div class="lightbox-index" id="lightboxIndex" aria-live="polite"></div>
+  </div>
+  <footer class="page-footer"><div class="footer-row wrap"><span>© <span id="year"></span> Aurora · 赵昕瑶</span><a href="interest-stage.html">继续阅读：舞台表现 →</a></div></footer>
+  <script src="about-diy.js?v=1.0"></script>
+<script src="interest-ambient.js?v=2.0"></script>
+</body>
+</html>

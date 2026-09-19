@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aurora / 赵昕瑶的个人主页——记录学习、兴趣与成长。">
+  <title>Aurora · 赵昕瑶｜个人主页 V1.0</title>
+  <style>
+    :root {
+      --night: #070911;
+      --panel: rgba(21, 24, 44, 0.72);
+      --line: rgba(214, 224, 255, 0.22);
+      --ice: #f3f7ff;
+      --muted: #aebbd8;
+      --steel: #b9c3dd;
+      --silver: #e6ebf7;
+      --blue: #8fc7ff;
+      --violet: #b49cff;
+      --pink: #ff9ed8;
+      --pink-2: #ff7dc4;
+      --metal1: #dfe6f5;
+      --metal2: #8a97b5;
+      --metal3: #cfd7ea;
+      --shadow: 0 26px 70px rgba(2, 4, 14, 0.5);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ice);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(140, 190, 255, 0.2), transparent 26rem),
+        radial-gradient(circle at 88% 30%, rgba(255, 158, 216, 0.16), transparent 26rem),
+        linear-gradient(150deg, #050611, #0a1026 50%, #0d0914);
+      font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image:
+        linear-gradient(rgba(255,255,255,.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.09) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+    .container { width: min(1140px, calc(100% - 44px)); margin: 0 auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(6, 8, 20, 0.74);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .brand em { font-style: normal; color: var(--silver); }
+    .brand .spark {
+      width: 22px;
+      height: 22px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 6px;
+      background: conic-gradient(from 210deg, var(--metal1), var(--metal2), var(--metal1), var(--metal3));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 0 16px rgba(255,158,216,.4);
+      color: #10131f;
+      font: 900 11px/1 Georgia, serif;
+    }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus { color: white; }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 56px;
+      padding: 72px 0;
+    }
+    .eyebrow {
+      color: var(--blue);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 14px 0 8px;
+      font-size: clamp(50px, 8vw, 104px);
+      line-height: .96;
+      letter-spacing: -.05em;
+    }
+    h1 span {
+      display: block;
+      color: transparent;
+      font-size: .42em;
+      letter-spacing: .3em;
+      margin-top: 16px;
+      background: linear-gradient(100deg, var(--metal1), var(--metal2) 45%, var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lead { max-width: 660px; color: var(--muted); font-size: 18px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 32px; }
+    .tag {
+      border: 1px solid var(--line);
+      background: linear-gradient(120deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius: 999px;
+      padding: 7px 14px;
+      color: #dde8ff;
+      font-size: 13px;
+    }
+    .tag.pop { border-color: rgba(255, 158, 216, .5); color: #ffc7e7; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      color: #150b16;
+      background: linear-gradient(110deg, var(--silver), var(--metal2) 45%, var(--pink-2));
+      border: 0;
+      font-weight: 800;
+      box-shadow: 0 10px 34px rgba(255, 158, 216, .28), inset 0 0 0 1px rgba(255,255,255,.3);
+    }
+    .btn-ghost { background: rgba(255,255,255,.04); }
+
+    .visual {
+      position: relative;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+    /* 空间直角坐标系 logo —— 标准三轴：Z 竖直、Y 水平、X 左下 */
+    .coord {
+      width: 84%;
+      max-width: 360px;
+      filter: drop-shadow(0 0 18px rgba(143, 199, 255, .32));
+    }
+    .coord .axis-line { stroke: url(#metalGrad); stroke-width: 3.5; stroke-linecap: round; }
+    .coord .axis-z { stroke: var(--blue); }
+    .coord .axis-y { stroke: var(--pink); stroke-width: 4.5; }
+    .coord .arrow { fill: var(--metal2); }
+    .coord .arrow-z { fill: var(--blue); }
+    .coord .arrow-y { fill: var(--pink); }
+    .coord .axis-label {
+      font: 700 24px/1 Georgia, serif;
+      fill: var(--ice);
+      letter-spacing: .04em;
+    }
+    .coord .label-o { fill: var(--silver); font-size: 20px; }
+    .coord .label-y { fill: var(--pink); }
+    .coord .origin-dot { fill: var(--silver); }
+    .visual-note {
+      position: absolute;
+      right: 0;
+      bottom: 4%;
+      padding: 9px 13px;
+      background: rgba(8, 11, 26, .82);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    section { padding: 96px 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 34px; }
+    .section-heading h2 { margin: 0; font-size: clamp(30px, 5vw, 50px); letter-spacing: -.04em; }
+    .section-heading p { margin: 0; color: var(--muted); max-width: 500px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      padding: 28px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(150deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+    }
+    .card.pop { border-color: rgba(255, 158, 216, .4); background: linear-gradient(150deg, rgba(255,158,216,.1), rgba(255,255,255,.02)); }
+    .card-number { color: var(--metal2); font: 700 12px/1 monospace; letter-spacing: .1em; }
+    .card h3 { margin: 22px 0 8px; font-size: 20px; }
+    .card p { color: var(--muted); margin: 0; }
+
+    .project { display: grid; grid-template-columns: .85fr 1.15fr; gap: 26px; align-items: stretch; }
+    .project-art {
+      min-height: 360px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 74% 22%, rgba(255,158,216,.4), transparent 20%),
+        radial-gradient(circle at 30% 66%, rgba(143,199,255,.42), transparent 26%),
+        conic-gradient(from 200deg, #141b36, #1a1030, #101830);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-art::after {
+      content: "V1.0 / 2026";
+      position: absolute;
+      left: 26px;
+      bottom: 22px;
+      font-size: clamp(36px, 6vw, 84px);
+      font-weight: 900;
+      letter-spacing: -.05em;
+      color: rgba(255,255,255,.82);
+      text-shadow: 0 0 24px rgba(255,158,216,.6);
+    }
+    .check-list { list-style: none; padding: 0; margin: 22px 0 0; }
+    .check-list li { padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .check-list li::before { content: "✦"; color: var(--blue); margin-right: 10px; }
+    .check-list li b { color: var(--ice); font-weight: 700; }
+
+    .contact {
+      text-align: center;
+      padding: 70px 24px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(143,199,255,.14), transparent 30%),
+        radial-gradient(circle at 80% 40%, rgba(255,158,216,.14), transparent 30%),
+        linear-gradient(120deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+    }
+    .contact h2 { font-size: clamp(32px, 6vw, 60px); margin: 0 0 12px; }
+    .contact p { color: var(--muted); }
+    .contact .cta { margin-top: 24px; }
+
+    footer { padding: 30px 0 44px; color: var(--muted); text-align: center; font-size: 13px; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 820px) {
+      .nav-links a:not(.btn) { display: none; }
+      .hero, .project { grid-template-columns: 1fr; }
+      .hero { gap: 20px; padding-top: 50px; }
+      .grid { grid-template-columns: 1fr; }
+      .section-heading { align-items: start; flex-direction: column; }
+      section { padding: 68px 0; }
+    }
+
+    /* ===== ae果 虚拟形象对话挂件（新增，不影响既有区块） ===== */
+    .dw-widget {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+    .dw-avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 158, 216, .5);
+      background: linear-gradient(150deg, var(--pink), var(--violet) 58%, var(--blue));
+      color: #150b16;
+      font-size: 24px;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(255, 158, 216, .32), inset 0 0 0 1px rgba(255,255,255,.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .dw-avatar:hover { transform: translateY(-3px) scale(1.04); }
+    .dw-avatar:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    .dw-panel {
+      width: min(340px, calc(100vw - 44px));
+      max-height: min(520px, 72vh);
+      display: none;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(10, 13, 28, .94);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .dw-panel.open { display: flex; }
+    .dw-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .dw-title { font-weight: 800; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+    .dw-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 10px var(--pink); }
+    .dw-close {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 7px;
+      border-radius: 8px;
+    }
+    .dw-close:hover { color: var(--ice); background: rgba(255,255,255,.07); }
+    .dw-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dw-msg {
+      max-width: 84%;
+      padding: 9px 12px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+    .dw-msg.bot {
+      align-self: flex-start;
+      background: linear-gradient(150deg, rgba(255,158,216,.14), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      border-bottom-left-radius: 4px;
+    }
+    .dw-msg.me {
+      align-self: flex-end;
+      background: linear-gradient(150deg, var(--metal1), var(--metal2));
+      color: #14182a;
+      font-weight: 600;
+      border-bottom-right-radius: 4px;
+    }
+    .dw-typing {
+      align-self: flex-start;
+      display: inline-flex;
+      gap: 4px;
+      padding: 11px 13px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .dw-typing i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--pink);
+      animation: dwBounce 1.2s infinite ease-in-out;
+    }
+    .dw-typing i:nth-child(2) { animation-delay: .15s; }
+    .dw-typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes dwBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+    .dw-foot {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .dw-input {
+      flex: 1;
+      min-width: 0;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--ice);
+      padding: 9px 12px;
+      font: inherit;
+      font-size: 14px;
+    }
+    .dw-input:focus { outline: none; border-color: rgba(255, 158, 216, .55); }
+    .dw-send {
+      border: 0;
+      border-radius: 10px;
+      padding: 0 14px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #150b16;
+      background: linear-gradient(110deg, var(--silver), var(--metal2) 45%, var(--pink-2));
+    }
+    .dw-send:hover { filter: brightness(1.06); }
+    @media (max-width: 820px) {
+      .dw-widget { right: 14px; bottom: 14px; }
+      .dw-avatar { width: 52px; height: 52px; font-size: 20px; }
+      .dw-panel { width: calc(100vw - 28px); max-height: 62vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .dw-typing i { opacity: .7; }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html#project" aria-label="返回当前主页的网页迭代区域" style="position:fixed;left:18px;bottom:18px;z-index:1000;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;color:#07090d;background:linear-gradient(118deg,#fafcff,#8fa1b4 38%,#dfe7ef 68%,#ffffff);border:1px solid #eef3f8;box-shadow:4px 4px 0 #252b34;text-decoration:none;font:700 13px/1 system-ui,sans-serif;letter-spacing:.04em;">← 返回当前主页</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="主导航">
+      <a class="brand" href="#top"><span class="spark">Z</span><em>Aurora · 赵昕瑶</em></a>
+      <div class="nav-links">
+        <a href="#about">关于我</a>
+        <a href="#project">作品</a>
+        <a href="#interests">兴趣</a>
+        <a class="btn btn-ghost" href="#contact">联系我</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="reveal">
+        <div class="eyebrow">Computer Science & Technology · Aurora</div>
+        <h1>赵昕瑶<span>AURORA</span></h1>
+        <p class="lead">一个把好奇心变成小项目的新生。我是赵昕瑶，英文名 Aurora，来自山西，目前在深圳。喜欢用冷冽的思考与温暖的行动，把每个灵感打磨成看得见的作品。</p>
+        <div class="tags" aria-label="个人标签">
+          <span class="tag">计算机科学与技术</span>
+          <span class="tag">大一新生</span>
+          <span class="tag">长跑</span>
+          <span class="tag pop">K-pop 爱好者</span>
+          <span class="tag pop">喜欢 DIY</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="#project">查看第一个作品</a>
+          <a class="btn btn-ghost" href="#about">认识我</a>
+        </div>
+      </div>
+      <div class="visual reveal" aria-label="空间直角坐标系 Z·X·Y 原创视觉 logo">
+        <svg class="coord" viewBox="0 0 360 340" role="img" aria-hidden="true">
+          <defs>
+            <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#eef2fb"/>
+              <stop offset=".55" stop-color="#98a5c4"/>
+              <stop offset="1" stop-color="#cfd7ea"/>
+            </linearGradient>
+          </defs>
+          <!-- Z 轴（竖直向上） -->
+          <line class="axis-line axis-z" x1="175" y1="205" x2="175" y2="46"/>
+          <path class="arrow arrow-z" d="M175 46 L168 60 L182 60 Z"/>
+          <!-- Y 轴（水平向右） -->
+          <line class="axis-line axis-y" x1="175" y1="205" x2="336" y2="205"/>
+          <path class="arrow arrow-y" d="M340 205 L322 195 L322 215 Z"/>
+          <!-- X 轴（向左下） -->
+          <line class="axis-line axis-x" x1="175" y1="205" x2="34" y2="310"/>
+          <path class="arrow arrow-x" d="M34 310 L46 302 L48 316 Z"/>
+          <!-- 原点 -->
+          <circle class="origin-dot" cx="175" cy="205" r="5"/>
+          <!-- 轴标签 -->
+          <text class="axis-label label-z" x="183" y="44">Z</text>
+          <text class="axis-label label-y" x="338" y="232">Y</text>
+          <text class="axis-label label-x" x="24" y="326">X</text>
+          <text class="axis-label label-o" x="186" y="224">O</text>
+        </svg>
+        <div class="visual-note">Z·X·Y 空间直角坐标系 · 原创</div>
+      </div>
+    </section>
+
+    <section id="about" class="container reveal">
+      <div class="section-heading">
+        <h2>关于我</h2>
+        <p>不堆砌经历，只诚实呈现“我是谁、我在做什么、我想成为什么”。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="card-number">01 / NOW</span><h3>现在的我</h3><p>计算机科学与技术专业大一新生，山西人，目前在深圳。刚从零开始接触编程与 AI 开发，愿意主动提问、持续练习，并认真理解每一段代码。</p></article>
+        <article class="card"><span class="card-number">02 / DIRECTION</span><h3>我的方向</h3><p>想成为一名“创新实用型人才”：既懂技术，也能把想法落地。目前正在学习英语、设计、剪辑与 PPT，为课程项目打基础。</p></article>
+        <article class="card pop"><span class="card-number">03 / MEMORY</span><h3>一个记忆点</h3><p>Aurora 这也是我的英文名，代表我喜欢的冷与暖的碰撞——冷静的银蓝底色里，藏着一抹克制的粉。</p></article>
+      </div>
+    </section>
+
+    <section id="project" class="container reveal">
+      <div class="section-heading"><h2>项目与作品</h2><p>我的第一个 Vibe Coding 作品正在生长。目前还没有外部项目，以下是正在构建的本页。</p></div>
+      <div class="project">
+        <div class="project-art" role="img" aria-label="个人主页 V1.0 抽象封面"></div>
+        <article class="card">
+          <span class="card-number">FEATURED · IN PROGRESS</span>
+          <h3>个人主页 V1.0</h3>
+          <p>我的第一个 AI 辅助开发项目，用 HTML、CSS 和 JavaScript 构建，包含响应式布局、导航与滚动入场效果。</p>
+          <ul class="check-list">
+            <li><b>目标：</b>让访问者一分钟内认识我</li>
+            <li><b>原则：</b>内容真实、结构清晰、隐私安全</li>
+            <li><b>方法：</b>AI 协助生成，我负责选择、修改与验证</li>
+            <li><b>下一步：</b>把好奇心做成更多小项目并收集反馈</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="interests" class="container reveal">
+      <div class="section-heading"><h2>兴趣与技能</h2><p>这里是我真实的热爱与正在投入的技能，会随着成长持续更新。</p></div>
+      <div class="grid">
+        <article class="card pop"><span class="card-number">MUSIC</span><h3>音乐 · K-pop</h3><p>主担 aespa，团偏 Winter 与 asa；也喜欢 BabyMonster 与 Rap。舞台表现力与视觉冲击是我的灵感来源。</p></article>
+        <article class="card"><span class="card-number">VISUAL</span><h3>视觉 · 创作</h3><p>风景摄影、素描绘画是我的表达方式；喜欢在构图中平衡冷冽与温度，把瞬间的美定格下来。</p></article>
+        <article class="card"><span class="card-number">MOVE</span><h3>运动 · 户外</h3><p>长跑训练耐性与节奏；单板滑雪享受速度与自由。阅读则让我在动与静之间保持思考。</p></article>
+        <article class="card"><span class="card-number">SKILLS</span><h3>正在学习</h3><p>英语、设计、剪辑、PPT，以及计算机基础、AI 辅助开发和 Git 版本管理。</p></article>
+        <article class="card"><span class="card-number">DIY</span><h3>动手乐趣</h3><p>喜欢 DIY，享受亲手把想法变成现实的过程，这种从 0 到 1 的满足感和做项目很像。</p></article>
+        <article class="card pop"><span class="card-number">GOAL</span><h3>想要成为</h3><p>一名创新实用型人才——既能提出好想法，也能用技术与坚持把它变成可用的成果。</p></article>
+      </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+      <div class="contact">
+        <div class="eyebrow">Let's connect</div>
+        <h2>一起见证成长</h2>
+        <p>欢迎通过学校邮箱联系我，也欢迎针对我的作品提出反馈与讨论。</p>
+        <div class="actions cta" style="justify-content:center;">
+          <a class="btn btn-primary" href="mailto:zhaoxinyao_080311@tju.edu.cn">zhaoxinyao_080311@tju.edu.cn</a>
+          <a class="btn btn-ghost" href="mailto:xinyao-aurora.zhao@connect.polyu.edu.hk">xinyao-aurora.zhao@connect.polyu.edu.hk</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Aurora · 赵昕瑶 — Built, reviewed and improved with responsible AI assistance.</footer>
+
+  <!-- ae果：虚拟形象对话挂件（新增，独立于既有区块） -->
+  <div class="dw-widget" id="dwWidget">
+    <section class="dw-panel" id="dwPanel" aria-label="ae果 对话面板" aria-hidden="true">
+      <div class="dw-head">
+        <span class="dw-title"><span class="dw-dot"></span>ae果</span>
+        <button class="dw-close" id="dwClose" type="button" aria-label="关闭对话面板">✕</button>
+      </div>
+      <div class="dw-body" id="dwBody" role="log" aria-live="polite"></div>
+      <form class="dw-foot" id="dwForm">
+        <input class="dw-input" id="dwInput" type="text" placeholder="问我点什么…" autocomplete="off" aria-label="输入消息">
+        <button class="dw-send" type="submit">发送</button>
+      </form>
+    </section>
+    <button class="dw-avatar" id="dwAvatar" type="button" aria-label="打开 ae果 对话" aria-expanded="false">果</button>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+      items.forEach((item) => observer.observe(item));
+    } else {
+      items.forEach((item) => item.classList.add('visible'));
+    }
+  </script>
+
+  <script>
+    /* ===== ae果 虚拟形象对话（纯本地关键词匹配，不联网、无第三方库） ===== */
+    (function () {
+      var panel = document.getElementById('dwPanel');
+      var avatar = document.getElementById('dwAvatar');
+      var closeBtn = document.getElementById('dwClose');
+      var body = document.getElementById('dwBody');
+      var form = document.getElementById('dwForm');
+      var input = document.getElementById('dwInput');
+
+      /* 本地问答库：关键词命中即返回答案 */
+      var QA = [
+        { k: ['你是谁', '你叫什么', '介绍一下你', '你是什么', '自我介绍', 'ae果'],
+          a: '我是 ae果，赵昕瑶的虚拟分身。用她的话说——一个把好奇心变成小项目的新生。' },
+        { k: ['网站', '主页', '干嘛', '干什么', '有什么用', '这是什么'],
+          a: '这是赵昕瑶的个人主页，记录她的学习、兴趣和小项目。我负责帮你快速找到答案。' },
+        { k: ['学什么', '专业', '读书', '学校', '在哪读', '天大', '天津大学', '港理工', 'polyu', '大学'],
+          a: '她在天津大学与香港理工大学联合培养的未来技术学院读本科，方向是计算机，现在是大一新生。' },
+        { k: ['项目', '作品', '在做什么', '开发', '做过'],
+          a: '目前还没有正式项目。她正在打磨这个主页本身，当作第一个练手作品。' },
+        { k: ['联系', '邮箱', 'email', 'mail', '怎么找'],
+          a: '可以发邮件：zhaoxinyao_080311@tju.edu.cn 或 xinyao-aurora.zhao@connect.polyu.edu.hk。' },
+        { k: ['怎么做', '技术', '用了什么', '代码', '框架', 'ai'],
+          a: '纯 HTML + CSS + JS 手写的，没用任何第三方框架。AI 参与了初稿，但修改和验证都是她自己做的。' },
+        { k: ['你好', '哈喽', 'hi', 'hello', '嗨', '在吗'],
+          a: '嗨，我是 ae果。想问赵昕瑶什么？学习、项目、联系她，我都答得上。' },
+        { k: ['谢谢', '感谢', 'thanks'],
+          a: '不客气，这是我该做的。（虽然我也没做太多）' }
+      ];
+      var FALLBACK = '这个我还没写进设定里。你可以问我：你是谁、在学什么、在做什么项目、怎么联系她、网站是怎么做的。';
+      var GREETING = '嗨，我是 ae果，赵昕瑶的虚拟分身。想了解她什么？';
+
+      function match(text) {
+        var t = text.toLowerCase();
+        for (var i = 0; i < QA.length; i++) {
+          for (var j = 0; j < QA[i].k.length; j++) {
+            if (t.indexOf(QA[i].k[j].toLowerCase()) !== -1) return QA[i].a;
+          }
+        }
+        return FALLBACK;
+      }
+
+      function addMsg(text, who) {
+        var el = document.createElement('div');
+        el.className = 'dw-msg ' + who;
+        el.textContent = text;
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+      }
+
+      function botReply(text) {
+        var typing = document.createElement('div');
+        typing.className = 'dw-typing';
+        typing.setAttribute('aria-label', 'ae果 正在输入');
+        typing.innerHTML = '<i></i><i></i><i></i>';
+        body.appendChild(typing);
+        body.scrollTop = body.scrollHeight;
+        window.setTimeout(function () {
+          body.removeChild(typing);
+          addMsg(text, 'bot');
+        }, 650);
+      }
+
+      function openPanel() {
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        avatar.setAttribute('aria-expanded', 'true');
+        window.setTimeout(function () { input.focus(); }, 50);
+      }
+
+      function closePanel() {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        avatar.setAttribute('aria-expanded', 'false');
+      }
+
+      avatar.addEventListener('click', function () {
+        if (panel.classList.contains('open')) { closePanel(); } else { openPanel(); }
+      });
+      closeBtn.addEventListener('click', closePanel);
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var text = input.value.trim();
+        if (!text) return;
+        addMsg(text, 'me');
+        input.value = '';
+        botReply(match(text));
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closePanel();
+      });
+
+      /* 页面加载后主动打招呼 */
+      window.setTimeout(function () { addMsg(GREETING, 'bot'); }, 800);
+    })();
+  </script>
+</body>
+</html>

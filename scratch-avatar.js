@@ -29,7 +29,8 @@
 
   function drawCover() {
     var bounds = reveal.getBoundingClientRect();
-    var ratio = Math.min(window.devicePixelRatio || 1, 2);
+    var deviceRatio = window.devicePixelRatio || 1;
+    var ratio = Math.min(deviceRatio, deviceRatio > 1.5 ? 1.25 : 1);
     cssWidth = Math.max(1, Math.round(bounds.width));
     cssHeight = Math.max(1, Math.round(bounds.height));
     canvas.width = Math.round(cssWidth * ratio);
@@ -83,7 +84,7 @@
     var pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
     var transparent = 0;
     var sampled = 0;
-    var step = Math.max(1, Math.floor((window.devicePixelRatio || 1) * 10));
+    var step = Math.max(12, Math.floor((window.devicePixelRatio || 1) * 14));
     for (var y = 0; y < canvas.height; y += step) {
       for (var x = 0; x < canvas.width; x += step) {
         sampled += 1;
@@ -102,7 +103,7 @@
     stage.classList.add('scratch-unlocked');
     lockControls(false);
     if (status) {
-      status.textContent = '动作已解锁';
+      status.textContent = document.documentElement.lang === 'en' ? 'Actions unlocked' : '动作已解锁';
       status.classList.add('show');
       window.setTimeout(function () { status.classList.remove('show'); }, 1400);
     }
@@ -173,3 +174,17 @@
   lockControls(true);
   drawCover();
 })();
+
+import('./avatar-3d-rotate.js?v=3.5.9').catch(function (error) {
+  console.error('Unable to start the 3D avatar:', error);
+  var loading = document.getElementById('avatarLoading');
+  var loadingText = loading && loading.querySelector('b');
+  var status = document.getElementById('avatarStatus');
+  var openedAsFile = window.location.protocol === 'file:';
+  var message = openedAsFile ? '请通过本地服务器打开页面，不能直接双击 HTML' : '3D 引擎启动失败，请刷新页面重试';
+  if (loadingText) loadingText.textContent = message;
+  if (status) {
+    status.textContent = message;
+    status.classList.add('show');
+  }
+});

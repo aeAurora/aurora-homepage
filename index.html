@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Aurora / 赵昕瑶的个人主页——记录学习、兴趣与成长。">
-  <title>Aurora · 赵昕瑶｜个人主页 V3.0 正式版</title>
+  <title>Aurora · 赵昕瑶｜个人主页 V3.5 本地开发版</title>
   <style>
     :root {
       --night: #070911;
@@ -1198,11 +1198,11 @@
     @media(prefers-reduced-motion:reduce){.avatar-stage.action-wave .avatar-wave-left{animation:none;opacity:1}.avatar-stage.action-wave .avatar-wave-right{animation:none;opacity:0}}
 
   </style>
-  <link rel="stylesheet" href="v3.css">
+  <link rel="stylesheet" href="v3.css?v=3.5.17">
   <link rel="stylesheet" href="identity-logo.css">
+  <link rel="stylesheet" href="emotion-intro.css?v=1.1.0">
   <link rel="stylesheet" href="hyper-text.css">
   <link rel="stylesheet" href="scratch-avatar.css">
-  <link rel="stylesheet" href="fluid-cursor-layer.css">
 </head>
 <body>
   <header class="site-header">
@@ -1221,6 +1221,9 @@
 
   <main id="top">
     <section class="hero container">
+      <div class="ambient-field" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
       <div class="hero-copy reveal">
         <div class="identity-line"><b>IDENTITY / 03.0</b><span>CS STUDENT · SHENZHEN</span></div>
         <div class="eyebrow">Computer Science & Technology · Aurora</div>
@@ -1237,82 +1240,75 @@
         </div>
         <div class="actions">
           <a class="btn btn-primary" href="#interests">看看我喜欢什么</a>
-          <a class="btn btn-ghost" href="#project">第一个小项目：网页迭代</a>
+          <a class="btn btn-ghost" href="#project">看看我的小项目</a>
         </div>
       </div>
-      <div class="identity-logo" role="img" aria-label="由姓名缩写 Z、X、Y 构成的空间直角坐标系 Logo">
+      <div class="identity-logo" id="identityLogo" tabindex="0" role="img" aria-label="可拖动旋转的姓名缩写 Z、X、Y 玻璃球坐标系；双击恢复默认角度">
         <span class="identity-logo-glow" aria-hidden="true"></span>
-        <svg viewBox="0 0 220 220" aria-hidden="true">
+        <span class="identity-sphere-shadow" aria-hidden="true"></span>
+        <svg class="identity-logo-sphere" viewBox="0 0 220 220" aria-hidden="true">
           <defs>
+            <radialGradient id="coordSphere" cx="34%" cy="25%" r="76%">
+              <stop offset="0" stop-color="#eaffff" stop-opacity=".24"/>
+              <stop offset=".28" stop-color="#72e4e0" stop-opacity=".09"/>
+              <stop offset=".62" stop-color="#101b2d" stop-opacity=".6"/>
+              <stop offset="1" stop-color="#02050b" stop-opacity=".94"/>
+            </radialGradient>
             <linearGradient id="coordShell" x1="22" y1="18" x2="194" y2="202" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#f8fdff" stop-opacity=".92"/>
-              <stop offset=".28" stop-color="#72e4e0" stop-opacity=".48"/>
-              <stop offset=".58" stop-color="#918be7" stop-opacity=".36"/>
-              <stop offset=".82" stop-color="#ef8fc5" stop-opacity=".52"/>
-              <stop offset="1" stop-color="#ffffff" stop-opacity=".84"/>
+              <stop offset="0" stop-color="#f8fdff" stop-opacity=".95"/>
+              <stop offset=".28" stop-color="#72e4e0" stop-opacity=".58"/>
+              <stop offset=".58" stop-color="#918be7" stop-opacity=".38"/>
+              <stop offset=".82" stop-color="#ef8fc5" stop-opacity=".66"/>
+              <stop offset="1" stop-color="#ffffff" stop-opacity=".88"/>
             </linearGradient>
             <linearGradient id="coordAxis" x1="48" y1="168" x2="181" y2="42" gradientUnits="userSpaceOnUse">
               <stop stop-color="#72e4e0"/><stop offset=".5" stop-color="#f8fbff"/><stop offset="1" stop-color="#ef8fc5"/>
             </linearGradient>
-            <radialGradient id="coordCore">
-              <stop stop-color="#fff"/><stop offset=".35" stop-color="#bffaff"/><stop offset="1" stop-color="#72e4e0" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="liquidGlass" x="-30%" y="-30%" width="160%" height="160%">
-              <feTurbulence type="fractalNoise" baseFrequency=".012 .018" numOctaves="2" seed="8" result="noise">
-                <animate attributeName="baseFrequency" dur="9s" values=".012 .018;.018 .011;.012 .018" repeatCount="indefinite"/>
-              </feTurbulence>
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="B"/>
-              <feGaussianBlur stdDeviation=".35"/>
-            </filter>
+            <radialGradient id="coordCore"><stop stop-color="#fff"/><stop offset=".35" stop-color="#bffaff"/><stop offset="1" stop-color="#72e4e0" stop-opacity="0"/></radialGradient>
             <filter id="coordBloom" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5"/></filter>
+            <clipPath id="coordSphereClip"><circle cx="110" cy="110" r="91"/></clipPath>
           </defs>
-          <path class="logo-shell" d="M111 14C151 12 194 38 201 78c7 38-16 78-49 106-30 25-71 30-103 5-31-25-39-70-24-106 15-37 47-67 86-69Z"/>
-          <path class="logo-rim" d="M110 23c37-1 75 22 82 57 7 34-14 70-45 96-27 22-63 27-92 5-28-23-35-63-22-95 13-34 42-61 77-63Z"/>
-          <g class="logo-axis" fill="none" stroke="url(#coordAxis)" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M108 112 183 112m-10-8 10 8-10 8"/>
-            <path d="M108 112 108 40m-8 10 8-10 8 10"/>
-            <path d="M108 112 55 165m2-13-2 13 13-2"/>
+          <circle class="sphere-body" cx="110" cy="110" r="91"/>
+          <g class="sphere-grid" clip-path="url(#coordSphereClip)">
+            <ellipse cx="110" cy="110" rx="88" ry="31"/>
+            <ellipse cx="110" cy="110" rx="31" ry="88"/>
+            <ellipse class="sphere-grid-diagonal" cx="110" cy="110" rx="88" ry="31" transform="rotate(55 110 110)"/>
           </g>
-          <circle class="logo-core-blur" cx="108" cy="112" r="18"/>
-          <circle class="logo-core" cx="108" cy="112" r="5"/>
-          <g class="logo-letters"><text x="189" y="117">X</text><text x="103" y="32">Y</text><text x="40" y="181">Z</text></g>
-          <text class="logo-signature" x="110" y="204" text-anchor="middle">Z · X · Y / AURORA</text>
+          <g class="logo-axis" fill="none" stroke="url(#coordAxis)" stroke-linecap="round" stroke-linejoin="round">
+            <path id="coordAxisX"/><path id="coordAxisY"/><path id="coordAxisZ"/>
+          </g>
+          <circle class="logo-core-blur" cx="110" cy="110" r="19"/>
+          <circle class="logo-core" cx="110" cy="110" r="5"/>
+          <g class="logo-letters"><text id="coordLabelX">X</text><text id="coordLabelY">Y</text><text id="coordLabelZ">Z</text></g>
+          <ellipse class="sphere-highlight" cx="77" cy="61" rx="39" ry="18" transform="rotate(-31 77 61)"/>
+          <circle class="logo-rim" cx="110" cy="110" r="91"/>
+          <text class="logo-signature" x="110" y="211" text-anchor="middle">Z · X · Y / AURORA</text>
         </svg>
       </div>
-      <div class="visual avatar-stage reveal" id="avatarStage" role="group" aria-label="Aurora 的双形象互动舞台">
-        <div class="avatar-orbit" id="avatarOrbit" tabindex="0" role="button" aria-label="切换 Aurora 的黑帽酷感与耳机比耶形象；双击进入舞蹈模式">
-          <svg class="hero-avatar avatar-puppet avatar-bold" viewBox="0 0 554 1099" role="img" aria-label="Aurora 戴黑色棒球帽、穿黑色卫衣的原始虚拟形象">
-            <defs>
-              <clipPath id="clipHead"><path d="M40 35H514V605H40Z"/></clipPath>
-              <clipPath id="clipTorso"><path d="M145 475H409V805H145Z"/></clipPath>
-              <clipPath id="clipArmLeft"><path d="M72 485H205V790H72Z"/></clipPath>
-              <clipPath id="clipArmRight"><path d="M349 485H482V790H349Z"/></clipPath>
-              <clipPath id="clipLegLeft"><path d="M92 735H286V1068H92Z"/></clipPath>
-              <clipPath id="clipLegRight"><path d="M268 735H472V1068H268Z"/></clipPath>
-            </defs>
-            <g class="puppet-part puppet-leg puppet-leg-left" clip-path="url(#clipLegLeft)"><image href="assets/aurora-avatar-bold.png" width="554" height="1099"/></g>
-            <g class="puppet-part puppet-leg puppet-leg-right" clip-path="url(#clipLegRight)"><image href="assets/aurora-avatar-bold.png" width="554" height="1099"/></g>
-            <g class="puppet-part puppet-torso" clip-path="url(#clipTorso)"><image href="assets/aurora-avatar-bold.png" width="554" height="1099"/></g>
-            <g class="puppet-part puppet-arm puppet-arm-left" clip-path="url(#clipArmLeft)"><image href="assets/aurora-avatar-bold.png" width="554" height="1099"/></g>
-            <g class="puppet-part puppet-arm puppet-arm-right" clip-path="url(#clipArmRight)"><image href="assets/aurora-avatar-bold.png" width="554" height="1099"/></g>
-            <g class="puppet-part puppet-head" clip-path="url(#clipHead)"><image href="assets/aurora-avatar-bold.png" width="554" height="1099"/></g>
-          </svg>
-          <img class="hero-avatar avatar-wave-frame avatar-wave-left" src="assets/aurora-avatar-wave-left.png" alt="Aurora 抬起右手挥手的姿态">
-          <img class="hero-avatar avatar-wave-frame avatar-wave-right" src="assets/aurora-avatar-wave-right.png" alt="Aurora 右手向另一侧挥动的姿态">
-          <img class="hero-avatar avatar-peace" src="assets/aurora-avatar-peace.png" alt="Aurora 戴耳机、比出胜利手势的原始虚拟形象">
+      <div class="visual avatar-stage reveal" id="avatarStage" role="group" aria-label="Aurora 的 3D 动画互动舞台">
+        <div class="avatar-orbit avatar-3d-viewport" id="avatarOrbit" aria-label="Aurora 的 3D 虚拟形象">
+          <canvas id="avatar3dCanvas" aria-label="可播放八种骨骼动画的 Aurora 3D 虚拟形象"></canvas>
+          <div class="avatar-loading" id="avatarLoading" role="status" aria-live="polite"><span></span><b>正在加载 3D 形象…</b></div>
         </div>
         <div class="scratch-reveal" id="avatarScratch">
           <canvas id="avatarScratchCanvas" tabindex="0" role="button" aria-label="刮开虚拟形象以解锁人物动作；也可以按回车键或空格键直接解锁"></canvas>
-          <div class="scratch-copy" aria-hidden="true"><strong>刮开 AURORA</strong><span>刮开 45% 即可解锁挥手、点头、跳跃、转身与高光动作</span></div>
+          <div class="scratch-copy" aria-hidden="true"><strong>刮开 AURORA</strong><span>刮开 45% 即可解锁全部 8 个真实 3D 动作</span></div>
         </div>
-        <div class="avatar-status" id="avatarStatus" aria-live="polite">待机中</div>
-        <div class="avatar-hint">点击人物切换形象 · 双击进入舞蹈模式</div>
+        <div class="avatar-status show" id="avatarStatus" aria-live="polite">正在加载模型</div>
         <div class="avatar-controls" aria-label="人物动作控制">
-          <button type="button" data-avatar-action="action-wave" data-label="挥手问候">挥手</button>
-          <button type="button" data-avatar-action="action-nod" data-label="点头回应">点头</button>
-          <button type="button" data-avatar-action="action-jump" data-label="轻轻跳一下">跳跃</button>
-          <button type="button" data-avatar-action="action-turn" data-label="侧身回望">转身</button>
-          <button type="button" data-avatar-action="action-glow" data-label="高光登场">高光</button>
+          <button type="button" data-avatar-action="afraid" data-label="害怕" data-label-en="Afraid">害怕</button>
+          <button type="button" data-avatar-action="dance_02" data-label="舞蹈二" data-label-en="Dance 02">舞蹈 02</button>
+          <button type="button" data-avatar-action="angry_01" data-label="生气一" data-label-en="Angry 01">生气 01</button>
+          <button type="button" data-avatar-action="agree" data-label="赞同" data-label-en="Agree">赞同</button>
+          <button type="button" data-avatar-action="heart_pose" data-label="比心" data-label-en="Heart pose">比心</button>
+          <button type="button" data-avatar-action="dance_01" data-label="舞蹈一" data-label-en="Dance 01">舞蹈 01</button>
+          <button type="button" data-avatar-action="bow" data-label="鞠躬" data-label-en="Bow">鞠躬</button>
+          <button type="button" data-avatar-action="laugh_02" data-label="大笑" data-label-en="Laugh">大笑</button>
+        </div>
+        <div class="avatar-size-control" aria-label="人物大小调节">
+          <label for="avatarSize"><span>人物大小</span> <output id="avatarSizeValue" for="avatarSize">100%</output></label>
+          <input id="avatarSize" type="range" min="75" max="130" step="1" value="100" aria-label="调节人物大小">
+          <button id="avatarSizeReset" type="button">复位</button>
         </div>
         <div class="dw-widget" id="dwWidget">
           <section class="dw-panel" id="dwPanel" aria-label="ae果 对话面板" aria-hidden="true">
@@ -1328,11 +1324,12 @@
               <button type="button" data-prompt="介绍一下赵昕瑶">认识 Aurora</button>
               <button type="button" data-prompt="她在学什么？">学习经历</button>
               <button type="button" data-prompt="她喜欢什么？">兴趣爱好</button>
+              <button type="button" data-prompt="她为什么选择计算机？">专业选择</button>
             </div>
             <form class="dw-foot" id="dwForm">
               <div class="dw-input-halo">
                 <span class="dw-input-spark" aria-hidden="true"></span>
-                <input class="dw-input" id="dwInput" type="text" placeholder="输入问题，和 ae果聊聊…" autocomplete="off" aria-label="输入消息">
+                <input class="dw-input" id="dwInput" type="text" maxlength="240" placeholder="输入问题，和 ae果聊聊…" autocomplete="off" aria-label="输入消息">
                 <button class="dw-send" type="submit" aria-label="发送消息"><span>发送</span><b aria-hidden="true">↗</b></button>
               </div>
               <span class="dw-hint">悬停输入框，开始对话 · 本地问答不会上传内容</span>
@@ -1349,22 +1346,42 @@
         <p>几个现在确实能描述我的关键词。</p>
       </div>
       <div class="grid">
-        <article class="card"><span class="card-number">01 / STUDY</span><h3>计算机大一</h3><p>计算机科学与技术专业，刚开始系统接触编程、AI 辅助开发和 Git，也在用这个网页练习把想法真正做出来。</p></article>
-        <article class="card"><span class="card-number">02 / CAMPUS</span><h3>在深圳读大学</h3><p>就读于天津大学与香港理工大学深圳未来技术学院。这里强调项目制学习与企业实践；对我来说，这是和一群新的伙伴互相学习、共同进步的全新体验。</p></article>
-        <article class="card"><span class="card-number">03 / HANDS-ON</span><h3>喜欢动手做东西</h3><p>除了写代码，我也喜欢 DIY。享受把想法一点点做出来，看着一件事从不会到会、从零到成形。</p></article>
+        <a class="card about-link" href="about-study.html" aria-label="进入学习与专业详情页"><span class="card-number">01 / STUDY</span><h3>学习与专业</h3><p>一个偏爱文学艺术的人，为何选择计算机？记录我在文艺精神与技术探索之间寻找答案的过程。</p><span class="card-arrow">阅读我的选择 →</span></a>
+        <a class="card about-link" href="about-campus.html" aria-label="进入校园与成长详情页"><span class="card-number">02 / CAMPUS</span><h3>校园与成长</h3><p>从山西来到深圳，在跨校环境、项目制学习与城市速度中，逐渐成为更加独立的自己。</p><span class="card-arrow">阅读城市与成长 →</span></a>
+        <a class="card about-link" href="about-inner-voice.html" aria-label="进入一个 ENFJ 的内心独白详情页"><span class="card-number">03 / INNER VOICE</span><h3>一个 ENFJ 的内心独白</h3><p>成为我自己，是我青春时期的英雄主义。</p><span class="card-arrow">听见我的内心独白 →</span></a>
       </div>
     </section>
 
     <section id="project" class="container reveal">
-      <div class="section-heading"><h2>网页迭代</h2><p>从第一张网页到完整正式版，每一次更新都留下真实的学习轨迹。</p></div>
-      <div class="project">
-        <div class="project-art" role="img" aria-label="个人主页版本迭代抽象封面"></div>
+      <div class="section-heading"><h2>项目与作品</h2><p>从持续迭代的个人主页，到可以自由探索的 3D 模型，记录每一次把想法做成作品的过程。</p></div>
+      <div class="works-showcase">
+        <article class="work-panel work-panel-web">
+          <header class="work-panel-head">
+            <span>01 / WEB EVOLUTION</span>
+            <div><h3>个人主页网页迭代</h3><p>从 V1.0 到当前版本，完整记录页面结构、视觉表达与互动体验的成长过程。</p></div>
+          </header>
+          <div class="project">
+            <div class="project-art" role="img" aria-label="个人主页版本迭代抽象封面"></div>
         <article class="card timeline" aria-label="个人主页迭代时间线">
           <a class="timeline-item version-link" href="versions/index-v1.0.html" aria-label="查看个人主页 V1.0 版本"><span class="timeline-version">V1.0 / 初版</span><div><h3>从零搭起第一张个人主页</h3><p>第一次用原生 HTML、CSS 和 JavaScript 整理个人信息，建立基础页面结构与最初的视觉表达。</p><span class="version-action">查看 V1.0 →</span></div></a>
           <a class="timeline-item version-link" href="versions/index-v1.5-20260910.html" aria-label="查看个人主页 V1.5 版本"><span class="timeline-version">V1.5 / 2026.09.10</span><div><h3>完善内容与视觉风格</h3><p>补充姓名、专业、兴趣和联系方式等内容，优化响应式布局，让主页的信息与视觉层次更加完整。</p><span class="version-action">查看 V1.5 →</span></div></a>
           <a class="timeline-item version-link" href="versions/index-v2.0-20260911.html" aria-label="查看个人主页 V2.0 版本"><span class="timeline-version">V2.0 / 2026.09.11</span><div><h3>让主页更完整、更像本人</h3><p>加入真实的学校与个人信息、可互动虚拟形象、ae果问答和兴趣详情页，并继续优化按钮、动效与视觉层次。</p><span class="version-action">查看 V2.0 →</span></div></a>
           <a class="timeline-item version-link" href="versions/index-v2.5-20260917.html" aria-label="查看个人主页 V2.5 版本"><span class="timeline-version">V2.5 / 2026.09.17</span><div><h3>建立身份优先的未来感表达</h3><p>用银蓝粉信号色、三轴坐标与沉浸式光场重构首屏，同时保留全部内容、入口和本地交互。</p><span class="version-action">查看 V2.5 →</span></div></a>
-          <a class="timeline-item version-link current" href="#top" aria-label="查看当前个人主页 V3.0 正式版"><span class="timeline-version">V3.0 / 正式版</span><div><h3>完整正式版</h3><p>让双形象成为破框舞台主角，以互动追光重塑首屏，并统一内容层级、移动端体验与 ae果对话入口。</p><span class="version-action">当前 V3.0 · 回到顶部 ↑</span></div></a>
+          <a class="timeline-item version-link" href="versions/v3.0/index.html" aria-label="查看个人主页 V3.0 可公开初稿"><span class="timeline-version">V3.0 / 可公开初稿</span><div><h3>完成可公开初稿</h3><p>以双形象破框舞台重塑首屏，统一内容层级、移动端体验与 ae果对话入口。</p><span class="version-action">查看 V3.0 →</span></div></a>
+          <a class="timeline-item version-link current" href="#top" aria-label="查看当前个人主页 V3.5 可公开修改稿"><span class="timeline-version">V3.5 / 可公开修改稿</span><div><h3>3D 互动形象版</h3><p>在 V3.0 可公开初稿基础上加入本地 3D 虚拟形象、八种骨骼动画、刮开解锁，以及鼠标和触屏旋转控制。</p><span class="version-action">当前 V3.5 · 回到顶部 ↑</span></div></a>
+        </article>
+          </div>
+        </article>
+        <article class="work-panel work-panel-model">
+          <header class="work-panel-head">
+            <span>02 / 3D MODELING</span>
+            <div><h3>构建自己的 3D 建模</h3><p>把自己的 GLB 模型放进实时三维场景，以建模师视角观察形体、材质与空间关系。</p></div>
+          </header>
+          <a class="model-project-card" href="model-studio.html" aria-label="打开作品：构建自己的 3D 建模">
+            <span class="model-project-visual" aria-hidden="true"><i></i><b>MODEL 01</b></span>
+            <span class="model-project-copy"><strong>进入 3D 模型工作台</strong><small>支持鼠标和触屏全方位旋转、滚轮与双指缩放、视角复位和全屏观察。</small></span>
+            <span class="model-project-action">打开作品 →</span>
+          </a>
         </article>
       </div>
     </section>
@@ -1372,16 +1389,18 @@
     <section id="interests" class="container reveal">
       <div class="section-heading">
         <h2>兴趣坐标</h2>
-        <p>音乐与舞台、故事与影像、运动与探索，共同构成了学习之外真实而具体的我。</p>
+        <p>舞台与文字、故事与影像、运动与动手创造，共同构成了学习之外真实而具体的我。</p>
       </div>
-      <p class="interest-intro">我喜欢有力量感的舞台表达，也喜欢安静进入一本书、一部电影；在长跑、滑雪和新的运动里，我享受身体与注意力同时在线的感觉。</p>
-      <div class="grid">
-        <a class="card interest-link" href="interests.html#winter"><span class="card-number">WINTER / AESPA</span><h3>Winter 与 aespa</h3><p>喜欢 Winter 的照片和舞台，也会关注 aespa 的音乐与活动。</p><span class="card-arrow">进入照片与舞台 →</span></a>
-        <a class="card interest-link" href="interests.html#asa"><span class="card-number">ASA / BABYMONSTER</span><h3>ASA 与 BABYMONSTER</h3><p>ASA 是 BABYMONSTER 成员。这里会收集喜欢的 Rap 舞台与视频。</p><span class="card-arrow">进入 Rap 视频 →</span></a>
-        <a class="card interest-link" href="interests.html#books"><span class="card-number">BOOKS</span><h3>李娟与小说</h3><p>喜欢李娟的《冬牧场》《夏牧场》等作品，也是《哈利·波特》里的斯莱特林。</p><span class="card-arrow">进入书单 →</span></a>
-        <a class="card interest-link" href="interests.html#movies"><span class="card-number">MOVIES</span><h3>电影</h3><p>《阿甘正传》《消失的她》《给阿嫲的情书》《欢迎来龙餐馆》。</p><span class="card-arrow">进入影单 →</span></a>
-        <a class="card interest-link" href="interests.html#music"><span class="card-number">PLAYLIST</span><h3>我的歌单</h3><p>常听 aespa、BABYMONSTER、(G)I-DLE、IVE，也收藏英文歌与华语歌曲。</p><span class="card-arrow">进入歌单 →</span></a>
-        <a class="card interest-link" href="interests.html#sports"><span class="card-number">SPORTS</span><h3>我的运动</h3><p>喜欢尝试不同类型的运动，从长跑、滑雪到球类、射箭和滑板。</p><span class="card-arrow">查看运动图鉴 →</span></a>
+      <p class="interest-intro">舞台、文字、书影音、运动与亲手创造，是我感受世界的七种方式。它们颜色不同，却共同围成了完整的我。</p>
+      <div class="interest-orbit" aria-label="七种兴趣组成的彩虹圆环">
+        <div class="interest-orbit-center" aria-hidden="true"><span>MY</span><strong>INTERESTS</strong><small>七种热爱 · 一个我</small></div>
+        <a class="interest-node interest-node-1" href="interest-stage.html"><span>舞台表现</span></a>
+        <a class="interest-node interest-node-2" href="interest-writing.html"><span>文字随笔</span></a>
+        <a class="interest-node interest-node-3" href="interest-reading.html"><span>阅读</span></a>
+        <a class="interest-node interest-node-4" href="interest-movies.html"><span>电影</span></a>
+        <a class="interest-node interest-node-5" href="interest-music.html"><span>音乐</span></a>
+        <a class="interest-node interest-node-6" href="interest-sports.html"><span>运动</span></a>
+        <a class="interest-node interest-node-7" href="about-diy.html"><span>动手实践</span></a>
       </div>
     </section>
 
@@ -1422,16 +1441,31 @@
                 <select id="feedbackCategory" name="category" required><option value="主页建议">主页建议</option><option value="内容纠错">内容纠错</option><option value="交流合作">交流合作</option><option value="访客留言">访客留言</option><option value="作品评价">作品评价</option></select>
               </div>
             </div>
-            <label for="feedbackTitle">留言标题 <b>*</b></label>
-            <input id="feedbackTitle" name="title" type="text" minlength="2" maxlength="100" required placeholder="用一句话概括你的留言">
+            <fieldset class="feedback-device">
+              <legend>你正在使用的设备 <b>*</b></legend>
+              <div class="feedback-device-options">
+                <label><input name="device_type" type="radio" value="手机" required><span>手机</span></label>
+                <label><input name="device_type" type="radio" value="平板"><span>平板</span></label>
+                <label><input name="device_type" type="radio" value="电脑"><span>电脑</span></label>
+              </div>
+            </fieldset>
             <label for="feedbackContent">留言内容 <b>*</b></label>
             <textarea id="feedbackContent" name="content" rows="4" minlength="2" maxlength="1000" required placeholder="写下你的建议、想法或希望交流的内容……"></textarea>
             <div class="feedback-meta"><span>请勿填写密码等敏感信息</span><span id="feedbackCount">0 / 1000</span></div>
+            <div class="feedback-image-field">
+              <label for="feedbackImage">添加图片 <small>（选填，单张，最大 10 MB）</small></label>
+              <input id="feedbackImage" name="image" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+              <div class="feedback-image-preview" id="feedbackImagePreview" hidden>
+                <img id="feedbackImagePreviewImg" alt="待上传图片预览">
+                <button id="feedbackImageRemove" type="button">移除图片</button>
+              </div>
+              <small class="feedback-image-note">JPG、PNG、WebP 或 GIF；静态图片会在上传前压缩，图片仅随公开留言上传。</small>
+            </div>
             <label for="feedbackContact">联系方式 <small>（选填，仅我可见）</small></label>
             <input id="feedbackContact" name="contact" type="text" maxlength="200" placeholder="邮箱或其他方便联系你的方式">
             <label class="feedback-visibility" for="feedbackPublic">
               <input id="feedbackPublic" name="wants_public" type="checkbox">
-              <span><strong>允许公开展示这条留言</strong><small>公开显示名称、类型、内容和日期；标题与联系方式不会公开。</small></span>
+              <span><strong>允许公开展示这条留言</strong><small>公开显示名称、类型、设备、内容、图片和日期；联系方式不会公开。</small></span>
             </label>
             <button class="btn btn-primary feedback-submit" id="feedbackSubmit" type="submit">发送留言</button>
             <p class="feedback-message" id="feedbackMessage" role="status" aria-live="polite"></p>
@@ -1473,16 +1507,58 @@
       items.forEach((item) => item.classList.add('visible'));
     }
 
-    window.addEventListener('pointermove', (event) => {
-      document.body.style.setProperty('--light-x', `${(event.clientX / window.innerWidth) * 100}%`);
-      document.body.style.setProperty('--light-y', `${(event.clientY / window.innerHeight) * 100}%`);
-    }, { passive:true });
+    const hero = document.querySelector('.hero');
+    const ambientField = document.querySelector('.ambient-field');
+    const ambientPoints = ambientField ? Array.from(ambientField.querySelectorAll('i')) : [];
+    const pointDepths = [-0.18, 0.22, 0.35, -0.24, 0.42, -0.3, 0.26, 0.16];
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let backgroundFrame = 0;
+
+    if (finePointer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.addEventListener('pointermove', (event) => {
+        if (backgroundFrame) return;
+        backgroundFrame = requestAnimationFrame(() => {
+          backgroundFrame = 0;
+          document.body.style.setProperty('--light-x', `${(event.clientX / window.innerWidth) * 100}%`);
+          document.body.style.setProperty('--light-y', `${(event.clientY / window.innerHeight) * 100}%`);
+          if (!hero || !ambientField) return;
+          const bounds = hero.getBoundingClientRect();
+          const localX = Math.max(0, Math.min(bounds.width, event.clientX - bounds.left));
+          const localY = Math.max(0, Math.min(bounds.height, event.clientY - bounds.top));
+          const offsetX = localX / bounds.width - 0.5;
+          const offsetY = localY / bounds.height - 0.5;
+          hero.style.setProperty('--hero-light-x', `${(localX / bounds.width) * 100}%`);
+          hero.style.setProperty('--hero-light-y', `${(localY / bounds.height) * 100}%`);
+          ambientField.style.setProperty('--field-x', `${offsetX * 24}px`);
+          ambientField.style.setProperty('--field-y', `${offsetY * 16}px`);
+          ambientPoints.forEach((point, index) => {
+            const depth = pointDepths[index] || 0.2;
+            point.style.transform = `translate3d(${offsetX * 34 * depth}px, ${offsetY * 24 * depth}px, 0)`;
+          });
+        });
+      }, { passive:true });
+
+      ['project', 'interests'].forEach((id) => {
+        const section = document.getElementById(id);
+        if (!section) return;
+        section.addEventListener('pointerdown', (event) => {
+          if (event.button !== 0 || event.target.closest('a, button, input, select, textarea, label')) return;
+          const bounds = section.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'section-ripple';
+          ripple.style.left = `${event.clientX - bounds.left}px`;
+          ripple.style.top = `${event.clientY - bounds.top}px`;
+          ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+          section.appendChild(ripple);
+        });
+      });
+    }
 
     const avatarStage = document.getElementById('avatarStage');
     const avatarStatus = document.getElementById('avatarStatus');
     const avatarControls = document.querySelector('.avatar-controls');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (avatarStage) {
+    if (avatarStage && !document.getElementById('avatar3dCanvas')) {
       const actionClasses = ['action-wave', 'action-nod', 'action-jump', 'action-turn', 'action-glow'];
       let actionTimer = 0;
       let clickTimer = 0;
@@ -1523,7 +1599,7 @@
 
       if (!reduceMotion) {
         avatarStage.addEventListener('pointermove', (event) => {
-          if (event.target.closest('.dw-widget, .avatar-controls')) return;
+          if (event.target.closest('.dw-widget, .avatar-controls, .avatar-size-control')) return;
           const bounds = avatarStage.getBoundingClientRect();
           const localX = event.clientX - bounds.left;
           const localY = event.clientY - bounds.top;
@@ -1550,12 +1626,12 @@
       }
 
       avatarStage.addEventListener('click', (event) => {
-        if (event.target.closest('.dw-widget, .avatar-controls')) return;
+        if (event.target.closest('.dw-widget, .avatar-controls, .avatar-size-control')) return;
         clearTimeout(clickTimer);
         clickTimer = setTimeout(togglePortrait, 230);
       });
       avatarStage.addEventListener('dblclick', (event) => {
-        if (event.target.closest('.dw-widget, .avatar-controls')) return;
+        if (event.target.closest('.dw-widget, .avatar-controls, .avatar-size-control')) return;
         clearTimeout(clickTimer);
         clearTimeout(actionTimer);
         const restorePeacePose = avatarStage.classList.contains('pose-peace');
@@ -1568,7 +1644,7 @@
         }, 2500);
       });
       avatarStage.addEventListener('keydown', (event) => {
-        if (event.target.closest('.dw-widget, .avatar-controls')) return;
+        if (event.target.closest('.dw-widget, .avatar-controls, .avatar-size-control')) return;
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           togglePortrait();
@@ -1604,7 +1680,15 @@
         { id: 'site', k: ['这个网站', '这个网页', '主页', '这页', '网站是干嘛的'], a: '这是赵昕瑶的个人主页，也是她记录成长和放作品的入口。页面用原生 HTML、CSS、JS 做成，我就是其中的本地对话挂件。', q: '要不要听听她为什么做主页？' },
         { id: 'school', topic: '学习', k: ['在哪读书', '在哪上学', '学校', '大学', '天津大学', '天大', '香港理工', '理工', 'polyu', 'tju', '联合培养'], a: '她在天津大学和香港理工大学合办的深圳未来技术学院读书，校区在深圳大学城国际校区，南山区。她是首届学生。', q: '还可以问我双校机制或全英文课。' },
         { id: 'study', topic: '学习', k: ['学习', '学业', '学习情况', '学什么', '课程', '学啥', '大一', '大类', '学习内容'], a: '学习方面，她现在主要接触数学基础、计算机基础、英语和项目式课程，目标是先把基础打牢。', q: '你想继续听她的课程、学习方法，还是全英文学习？' },
-        { id: 'interests', topic: '兴趣', k: ['兴趣', '兴趣爱好', '爱好', '喜欢什么', '平时喜欢', '课余生活'], a: '她的兴趣很丰富，可以分成三条线：音乐与舞台、运动与户外、视觉与手工。', q: '你可以直接回复“音乐”“运动”或“艺术”，我接着讲。' },
+        { id: 'interests', topic: '兴趣', k: ['兴趣', '兴趣爱好', '爱好', '喜欢什么', '平时喜欢', '课余生活', '平常干什么', '休息时做什么'], a: '她的兴趣很丰富，可以分成三条线：音乐与舞台、运动与户外、视觉与手工。', q: '你可以直接回复“音乐”“运动”或“艺术”，我接着讲。' },
+        { id: 'study-choice', topic: '学习', k: ['为什么选择计算机', '为什么学计算机', '为什么选计算机', '文科生学计算机', '文艺青年学计算机', '专业选择原因', '为何读计算机'], a: '她一直更偏爱文学、艺术、语文、英语和历史，但乔布斯传里“兼具文艺精神和科学素养”的表达触动了她。选择计算机不是丢掉文艺底色，而是想让感受力、想象力和对人的关注参与技术创造。', q: '还可以问她怎样理解“技术应该理解人”。' },
+        { id: 'human-tech', topic: '学习', k: ['文艺和技术', '文学和计算机', '人文和科技', '技术理解人', '技术为什么要理解人', '人情味的技术', '技术服务人', '文艺底色'], a: '她希望技术不只追求速度和功能，也能理解人的情绪、处境与真实需要。文艺素养对她来说不是技术之外的装饰，而是帮助技术走向人的福祉的一种感受力。' },
+        { id: 'about-pages', topic: '主页', k: ['关于我页面', '关于我有什么', '三个关于我', '学习页面', '校园页面', 'enfj 页面', '内心独白页面'], a: '“关于我”现在有三条可探索的叙事：学习页讲文艺底色与计算机，校园页沿照片走过山西到深圳，ENFJ 页把女大剑形象和她的内心独白放在一起。' },
+        { id: 'gaokao-papers', topic: '校园', k: ['试卷标题', '试题标题', '高三卷子', '剪试卷', '各地地名照片', '高三留下什么', '高考纪念'], a: '那张写着许多地名的照片不是录取通知书，而是她把高三做过的试卷标题剪下来保存。纸条上的地名来自各地试题，是备考日子的刻度，也是后来走出山西前的一段真实记忆。' },
+        { id: 'shanxi-shenzhen', topic: '校园', k: ['山西到深圳', '为什么离开山西', '来到深圳', '成长路线', '从家乡出发', '离家上大学'], a: '她从山西出发，带着高三记忆和装满行李的后备箱来到深圳。对她来说，认同深圳不是抹掉来处，而是在新的校园、伙伴和城市节奏里增加一个坐标，也变得更加独立。' },
+        { id: 'inner-heroism', topic: '内心', k: ['内心想法', '内心独白', '英雄主义', '成为自己', '我与我周旋久', '握紧自己的剑', '她怎么看自己'], a: '她的核心命题是：“成为我自己，是我青春时期的英雄主义。”她愿意热烈地走向别人，也在练习听见自己、为选择负责，不再只依靠别人的目光证明存在。' },
+        { id: 'sensitivity', topic: '内心', k: ['敏感', '共情', '情绪变化', '在意别人', '讨好别人', '边界感', '忽略自己'], a: '她很容易察觉气氛和他人情绪，也珍惜真诚连接。她不想丢掉这份感受力，但正在学习继续关心而不过度揣测，继续敏锐而不把每一次变化都归因于自己。' },
+        { id: 'future-goal', topic: '学习', k: ['未来想做什么', '以后想做什么', '未来方向', '职业规划', '未来目标', '以后干什么'], a: '她目前仍在探索更明确的方向。近期目标是打牢编程基础、完成更多真正能展示和使用的小项目；长期希望做出的技术不只证明“能做出来”，也能为具体的人带来帮助。' },
         { id: 'college', k: ['未来技术学院', '什么学院', '哪个学院', '学院是干嘛的', '什么是未来技术'], a: '全称是「天津大学香港理工大学深圳未来技术学院」，由天大和港理工合办。别和天大本部另一个「未来技术学院」搞混，它们只是名字像。', q: '你更关心课程、证书还是专业？' },
         { id: 'project', k: ['项目', '在做什么', '作品', '做了什么', '干了什么'], a: '她目前没有正式项目，手上最具体的作品是这个个人主页。她做它是为了介绍自己、记录成长，也给以后展示作品留一个入口。', q: '要不要问问主页怎么做的？' },
         { id: 'site-tech', k: ['怎么做的', '用什么做的', '技术栈', '网站怎么做', '代码'], a: '主页用原生 HTML、CSS、JS 做成，不依赖框架，双击文件就能打开。AI 会帮忙，但她会检查内容和代码，不会直接照单全收。', q: '她对 AI 的看法也挺直接，要听吗？' },
@@ -1628,15 +1712,15 @@
         { id: 'teacher', k: ['谁上课', '港理工老师', '香港老师', '师资'], a: '香港理工的老师会飞到深圳现场上课，不是网课。' },
         { id: 'company', k: ['企业', '参访', '产业', '大疆', '迈瑞', '滴普科技'], a: '她已经参访过大疆和迈瑞，滴普科技等企业也来校宣讲过。校区在南山区，这类接触企业的机会很常见。' },
         { id: 'college-choice', k: ['为什么选', '怎么想的', '为什么读这个', '首届'], a: '一是因为这是第一届，前面没有学长学姐，很多东西得自己趟；二是深圳开放、讲效率，新兴科技密集。她想看看自己能趟到哪。' },
-        { id: 'city', k: ['深圳', '山西', '城市氛围', '城市节奏', '天气', '太热', '太行山'], a: '她觉得深圳节奏快、讲效率，和自己的调性很像，南山区的科技感也强；最不适应的是太热，相比之下有太行山的山西凉快得多。深圳来自各地、各国的人很多，这点也让她觉得新鲜。' },
+        { id: 'city', k: ['深圳', '山西', '城市氛围', '城市节奏', '深圳天气', '太热', '太行山'], a: '她觉得深圳节奏快、讲效率，和自己的调性很像，南山区的科技感也强；最不适应的是太热，相比之下有太行山的山西凉快得多。深圳来自各地、各国的人很多，这点也让她觉得新鲜。' },
         { id: 'campus-life', k: ['校园生活', '一天', '日常', '朋友', '聚餐', '桌游', '辩论', '出去玩'], a: '她平时上课节奏相对轻松，有一群关系很好的朋友，经常聚餐和出去玩。她们还会组织辩论和桌游，群里有三十多人。' },
         { id: 'music', topic: '兴趣', k: ['音乐', 'k-pop', 'kpop', 'aespa', '追星', '歌手'], a: '音乐方面，她听 K-pop 比较多，主担 aespa，也喜欢舞台视觉与 Rap 带来的冲击感。', q: '除了音乐，还可以继续问运动、艺术或 DIY。' },
         { id: 'sport', k: ['运动', '长跑', '跑步', '800米', '400米', '越野赛', '滑雪', '单板', '射箭', '滑冰', '滑板', '篮球'], a: '高中时她拿过 800 米第一、第二名，400 米第二名，冬季越野赛女子组第一名；单板滑雪是在冬令营学的。射箭、滑冰、滑板、篮球也都玩，运动类邀请基本可以喊她。', q: '还想听她的艺术技能吗？' },
         { id: 'visual', k: ['摄影', '拍照', '拍什么', '风景', '美食', '素描', '画画', 'diy', '手工', '扭扭棒', '黏土', '粘土', '编织'], a: '她喜欢拍风景和美食，照片经常被朋友拿去当朋友圈素材；画画是一种长期爱好。DIY 方面，扭扭棒、黏土和编织都玩过。' },
         { id: 'art', k: ['艺术', '艺术技能', '钢琴', '民族舞', 'jazz', '爵士舞', '十级', '六级'], a: '她钢琴十级、民族舞六级，现在还在学 Jazz。学习和运动之外，这些也是她综合发展的底气。' },
         { id: 'origin', k: ['哪里人', '哪里的人', '哪的人', '家乡', '老家', '籍贯', '哪来的', '哪里来的'], a: '她是山西人，现在在深圳上学。' },
-        { id: 'age', k: ['多大', '年龄', '几岁', '多少岁'], a: function () { var now = new Date(); var age = now.getFullYear() - 2008; if (now.getMonth() < 2 || (now.getMonth() === 2 && now.getDate() < 11)) age--; return '她是 2008 年 3 月 11 日出生，现在 ' + age + ' 周岁。'; } },
-        { id: 'birthday', k: ['生日', '出生', '出生日期', '什么时候生的', '哪天生的'], a: '她出生于 2008 年 3 月 11 日。' },
+        { id: 'age', k: ['多大', '年龄', '几岁', '多少岁'], a: '她是大学本科生。出于隐私考虑，ae果不提供或推算她的具体年龄与出生日期。' },
+        { id: 'birthday', k: ['生日', '出生', '出生日期', '什么时候生的', '哪天生的', '哪年出生'], a: '具体出生日期属于她的隐私，ae果不会提供。可以换个公开话题问我，比如她的学习、作品或兴趣。' },
         { id: 'interviewer', k: ['我是面试官', '面试官', '招聘方', '面试她'], role: '面试官', a: '如果从面试角度看，先记住三点：她学习和动手能力强、适应新环境快、综合发展很能打。她成绩优异，也有田径名次、钢琴十级和民族舞六级这些具体经历。', q: '你更想追问学习、项目过程还是综合经历？' },
         { id: 'peer', k: ['我是同学', '同龄人', '同龄同学', '交朋友'], role: '同学', a: '同学你好。她很适合一起学习、运动、听歌、玩桌游，或者把一个小想法做出来；你也可以通过页面上的邮箱联系她。', q: '你和她有什么共同兴趣？' },
         { id: 'cooperate', k: ['合作', '采访', '内推', '简历', '招聘', '投简历', '招人', '合作方'], role: '合作方', a: '可以聊，先说下项目内容、你的身份或过往案例吧。我会把信息转给她，你也可以直接写邮件到 zhaoxinyao_080311@tju.edu.cn。' },
@@ -1648,23 +1732,74 @@
         { k: ['家庭', '家人是谁', '父母', '爸爸', '妈妈', '家庭情况'], a: '家庭这一栏我就不展开啦，给她留点生活区。换个公开话题问我吧。' },
         { k: ['政治立场', '政治观点', '敏感观点', '争议立场', '站队'], a: '这个立场题我不替她答，虚拟分身也不能抢本人麦克风嘛。' }
       ];
-      var FALLBACK = '这个我还没有可靠资料，不敢替她现编。你可以换个角度问她的学习、兴趣、校园生活、运动或主页。';
-      var GREETING = '嗨，我是 ae果，赵昕瑶的虚拟分身。想问什么直接说；方便的话先说下你是面试官、同学还是想合作，我换个说法。';
+      var FALLBACK = '这个我还没有可靠资料，不敢替她现编。你可以试着问：她为什么选择计算机、从山西到深圳经历了什么、ENFJ 的她怎样看待自己，或者她有哪些兴趣和作品。';
+      var GREETING = '嗨，我是 ae果，赵昕瑶的本地虚拟分身。你可以自然地问她的学习选择、校园成长、ENFJ 内心、兴趣、作品或合作方式；换种说法、有一点错别字也没关系。';
       var memory = { role: '', lastTopic: '', lastAnswerId: '', visitorNotes: [] };
 
+      function normalizeText(value) {
+        var text = String(value || '').toLowerCase();
+        if (text.normalize) text = text.normalize('NFKC');
+        var aliases = [
+          ['ai果', 'ae果'], ['a果', 'ae果'], ['为啥', '为什么'], ['为何', '为什么'],
+          ['咋样', '怎么样'], ['咋', '怎么'], ['干嘛', '做什么'], ['干啥', '做什么'],
+          ['啥', '什么'], ['念书', '上学'], ['读书', '上学'], ['个性', '性格'],
+          ['喜好', '兴趣'], ['电脑专业', '计算机'], ['ai分身', '虚拟分身'],
+          ['为什莫', '为什么'], ['深证', '深圳'], ['敏敢', '敏感']
+        ];
+        for (var i = 0; i < aliases.length; i++) text = text.split(aliases[i][0]).join(aliases[i][1]);
+        text = text.replace(/[\s，。！？、；：,.!?;:'"“”‘’（）()【】[\]{}<>《》~～·…—_-]+/g, ' ').trim();
+        text = text.replace(/^(请问|想问一下|我想问|我想知道|能不能告诉我|可以说说|麻烦问下)\s*/g, '');
+        return text.replace(/(呢|呀|啊|嘛|吧|哦|啦)[?？!！]*$/g, '').trim();
+      }
+
+      function compact(value) { return normalizeText(value).replace(/\s+/g, ''); }
+
+      function editDistance(a, b) {
+        var previous = [];
+        for (var j = 0; j <= b.length; j++) previous[j] = j;
+        for (var i = 1; i <= a.length; i++) {
+          var current = [i];
+          for (var k = 1; k <= b.length; k++) {
+            current[k] = Math.min(current[k - 1] + 1, previous[k] + 1, previous[k - 1] + (a[i - 1] === b[k - 1] ? 0 : 1));
+          }
+          previous = current;
+        }
+        return previous[b.length];
+      }
+
+      function fuzzyKeyword(text, keyword) {
+        var source = compact(text);
+        var word = compact(keyword);
+        if (!word || word.length < 4 || /^[a-z0-9-]+$/.test(word)) return false;
+        var allowance = word.length >= 7 ? 2 : 1;
+        var minLength = Math.max(2, word.length - allowance);
+        var maxLength = Math.min(source.length, word.length + allowance);
+        for (var size = minLength; size <= maxLength; size++) {
+          for (var start = 0; start + size <= source.length; start++) {
+            if (editDistance(source.slice(start, start + size), word) <= allowance) return true;
+          }
+        }
+        return false;
+      }
+
       function hasKeyword(text, keyword) {
-        var word = keyword.toLowerCase();
+        var source = normalizeText(text);
+        var word = normalizeText(keyword);
         if (/^[a-z0-9-]+$/.test(word)) {
           var escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          return new RegExp('(^|[^a-z0-9])' + escaped + '([^a-z0-9]|$)', 'i').test(text);
+          return new RegExp('(^|[^a-z0-9])' + escaped + '([^a-z0-9]|$)', 'i').test(source);
         }
-        return text.indexOf(word) !== -1;
+        return compact(source).indexOf(compact(word)) !== -1;
       }
 
       function score(text, entry) {
-        var hits = 0;
-        for (var i = 0; i < entry.k.length; i++) if (hasKeyword(text, entry.k[i])) hits++;
-        return hits;
+        var points = 0;
+        for (var i = 0; i < entry.k.length; i++) {
+          var length = compact(entry.k[i]).length;
+          if (hasKeyword(text, entry.k[i])) points += 2 + Math.min(length, 10) * 0.35;
+          else if (fuzzyKeyword(text, entry.k[i])) points += 1.4 + Math.min(length, 10) * 0.2;
+        }
+        return points;
       }
 
       function answer(entry) {
@@ -1690,19 +1825,22 @@
       }
 
       function match(text) {
-        var t = text.toLowerCase();
+        var t = normalizeText(text);
         rememberVisitor(t);
         var contextual = t;
-        if (memory.lastTopic && /^(那|那她|这个|这个呢|那里|那边|为什么|还有呢|详细说说)/.test(t)) contextual += ' ' + memory.lastTopic;
+        if (memory.lastTopic && /^(那|那她|这个|这个呢|那里|那边|为什么|还有|详细说说|具体说说|展开讲讲)/.test(t)) contextual += ' ' + memory.lastTopic;
         for (var i = 0; i < BLOCKS.length; i++) {
-          if (score(contextual, BLOCKS[i]) > 0) return BLOCKS[i].a;
+          for (var b = 0; b < BLOCKS[i].k.length; b++) {
+            if (hasKeyword(contextual, BLOCKS[i].k[b])) return BLOCKS[i].a;
+          }
         }
-        var best = null;
-        var bestScore = 0;
+        var ranked = [];
         for (var j = 0; j < ANSWERS.length; j++) {
           var currentScore = score(contextual, ANSWERS[j]);
-          if (currentScore > bestScore) { best = ANSWERS[j]; bestScore = currentScore; }
+          if (currentScore >= 2) ranked.push({ entry: ANSWERS[j], score: currentScore });
         }
+        ranked.sort(function (a, b) { return b.score - a.score; });
+        var best = ranked.length ? ranked[0].entry : null;
         if (!best) {
           if (memory.role) return FALLBACK + ' 我记得你是' + memory.role + '，可以告诉我你具体关注哪一块。';
           return FALLBACK;
@@ -1710,7 +1848,14 @@
         memory.lastTopic = best.topic || best.k[0];
         memory.lastAnswerId = best.id;
         if (best.role) memory.role = best.role;
-        return answer(best);
+        var combined = answer(best);
+        var asksMultiple = /(和|以及|还有|都|分别|同时)/.test(t);
+        if (asksMultiple && ranked.length > 1) {
+          var second = ranked[1].entry;
+          var distinctTopic = second.id !== best.id && (second.topic || second.id) !== (best.topic || best.id);
+          if (distinctTopic) combined += '\n\n另外，' + answer(second);
+        }
+        return combined;
       }
 
       function addMsg(text, who) {
@@ -1784,10 +1929,10 @@
   <script src="language-toggle.js"></script>
   <script src="supabase-config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="feedback.js"></script>
+  <script src="feedback.js?v=3.5.8"></script>
   <script src="hyper-text.js"></script>
-  <script src="scratch-avatar.js"></script>
-  <script src="fluid-cursor.js"></script>
-  <script>FluidCursor.init({ Z_INDEX: 0, TRAIL_WIDTH: 8, GLOW: 8, DISSIPATION: 0.22, HUE_SPEED: 2.2, CLICK_BURST: 10, RESPECT_MOTION: false });</script>
+  <script src="identity-logo-rotate.js?v=3.5.2"></script>
+  <script src="emotion-intro.js?v=1.1.0"></script>
+  <script src="scratch-avatar.js?v=3.5.9"></script>
 </body>
 </html>

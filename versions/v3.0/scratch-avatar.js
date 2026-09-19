@@ -1,0 +1,175 @@
+(function () {
+  'use strict';
+
+  var stage = document.getElementById('avatarStage');
+  var reveal = document.getElementById('avatarScratch');
+  var canvas = document.getElementById('avatarScratchCanvas');
+  if (!stage || !reveal || !canvas) return;
+
+  var context = canvas.getContext('2d', { willReadFrequently: true });
+  if (!context) return;
+
+  var controls = Array.prototype.slice.call(stage.querySelectorAll('[data-avatar-action]'));
+  var status = document.getElementById('avatarStatus');
+  var threshold = 45;
+  var scratching = false;
+  var complete = false;
+  var lastPoint = null;
+  var checkTimer = 0;
+  var cssWidth = 0;
+  var cssHeight = 0;
+
+  function lockControls(locked) {
+    controls.forEach(function (button) {
+      button.disabled = locked;
+      button.setAttribute('aria-disabled', locked ? 'true' : 'false');
+      button.title = locked ? '刮开人物遮罩后解锁' : '';
+    });
+  }
+
+  function drawCover() {
+    var bounds = reveal.getBoundingClientRect();
+    var ratio = Math.min(window.devicePixelRatio || 1, 2);
+    cssWidth = Math.max(1, Math.round(bounds.width));
+    cssHeight = Math.max(1, Math.round(bounds.height));
+    canvas.width = Math.round(cssWidth * ratio);
+    canvas.height = Math.round(cssHeight * ratio);
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    context.globalCompositeOperation = 'source-over';
+
+    var gradient = context.createLinearGradient(0, 0, cssWidth, cssHeight);
+    gradient.addColorStop(0, '#263b52');
+    gradient.addColorStop(.28, '#72e4e0');
+    gradient.addColorStop(.56, '#8585dc');
+    gradient.addColorStop(.8, '#ef8fc5');
+    gradient.addColorStop(1, '#d9f4ff');
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, cssWidth, cssHeight);
+
+    context.globalAlpha = .24;
+    context.strokeStyle = '#ffffff';
+    context.lineWidth = 1;
+    for (var x = -cssHeight; x < cssWidth; x += 28) {
+      context.beginPath();
+      context.moveTo(x, 0);
+      context.lineTo(x + cssHeight, cssHeight);
+      context.stroke();
+    }
+    context.globalAlpha = 1;
+  }
+
+  function pointFromEvent(event) {
+    var bounds = canvas.getBoundingClientRect();
+    return {
+      x: event.clientX - bounds.left,
+      y: event.clientY - bounds.top
+    };
+  }
+
+  function erase(from, to) {
+    context.save();
+    context.globalCompositeOperation = 'destination-out';
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+    context.lineWidth = Math.max(34, Math.min(cssWidth, cssHeight) * .095);
+    context.beginPath();
+    context.moveTo(from.x, from.y);
+    context.lineTo(to.x, to.y);
+    context.stroke();
+    context.restore();
+  }
+
+  function scratchedPercentage() {
+    var pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    var transparent = 0;
+    var sampled = 0;
+    var step = Math.max(1, Math.floor((window.devicePixelRatio || 1) * 10));
+    for (var y = 0; y < canvas.height; y += step) {
+      for (var x = 0; x < canvas.width; x += step) {
+        sampled += 1;
+        if (pixels[(y * canvas.width + x) * 4 + 3] < 32) transparent += 1;
+      }
+    }
+    return sampled ? transparent / sampled * 100 : 0;
+  }
+
+  function unlock() {
+    if (complete) return;
+    complete = true;
+    scratching = false;
+    reveal.classList.add('is-complete');
+    reveal.setAttribute('aria-hidden', 'true');
+    stage.classList.add('scratch-unlocked');
+    lockControls(false);
+    if (status) {
+      status.textContent = '动作已解锁';
+      status.classList.add('show');
+      window.setTimeout(function () { status.classList.remove('show'); }, 1400);
+    }
+  }
+
+  function scheduleCheck() {
+    window.clearTimeout(checkTimer);
+    checkTimer = window.setTimeout(function () {
+      if (scratchedPercentage() >= threshold) unlock();
+    }, 80);
+  }
+
+  canvas.addEventListener('pointerdown', function (event) {
+    if (complete) return;
+    event.preventDefault();
+    event.stopPropagation();
+    scratching = true;
+    reveal.classList.add('is-scratching');
+    canvas.setPointerCapture(event.pointerId);
+    lastPoint = pointFromEvent(event);
+    erase(lastPoint, lastPoint);
+  });
+
+  canvas.addEventListener('pointermove', function (event) {
+    if (!scratching || complete) return;
+    event.preventDefault();
+    event.stopPropagation();
+    var nextPoint = pointFromEvent(event);
+    erase(lastPoint, nextPoint);
+    lastPoint = nextPoint;
+    scheduleCheck();
+  });
+
+  function finishScratch(event) {
+    if (!scratching) return;
+    event.preventDefault();
+    event.stopPropagation();
+    scratching = false;
+    lastPoint = null;
+    reveal.classList.remove('is-scratching');
+    scheduleCheck();
+  }
+
+  canvas.addEventListener('pointerup', finishScratch);
+  canvas.addEventListener('pointercancel', finishScratch);
+  canvas.addEventListener('click', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  });
+  canvas.addEventListener('dblclick', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  });
+  canvas.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      unlock();
+    }
+  });
+
+  var resizeTimer = 0;
+  window.addEventListener('resize', function () {
+    if (complete) return;
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(drawCover, 120);
+  });
+
+  lockControls(true);
+  drawCover();
+})();

@@ -1,0 +1,41 @@
+/* 返回顶部悬浮按钮 */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(126, 231, 255, .42);
+  border-radius: 50%;
+  color: var(--stage-white, #f4f8ff);
+  background: radial-gradient(circle at 28% 22%, rgba(126, 231, 255, .2), transparent 45%), rgba(4, 9, 16, .9);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .38), 0 0 18px rgba(126, 231, 255, .12);
+  font: 800 22px/1 sans-serif;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(.88);
+  transition: opacity .22s ease, visibility .22s ease, transform .22s ease, color .2s ease, background .2s ease;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  color: #061019;
+  background: linear-gradient(135deg, var(--stage-blue, #7ee7ff), #d8c8ff 56%, var(--stage-pink, #ff8fd1));
+  outline: none;
+  transform: translateY(-3px) scale(1.04);
+}
+@media (max-width: 520px) {
+  .back-to-top { right: 14px; bottom: 14px; width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top { transition: none; }
+}
