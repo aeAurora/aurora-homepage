@@ -238,6 +238,10 @@ main > section:not(.hero) {
 }
 .hero.stage-active::after { opacity: .9; filter: blur(9px); }
 .hero-copy { z-index: 6; align-self: center; padding: 22px 0 0; }
+@media (min-width: 821px) {
+  .hero-copy { top: clamp(-72px, -5vh, -44px); }
+  .identity-line { transform: translateY(-18px); }
+}
 .identity-line { margin-bottom: 24px; }
 h1 { font-size: clamp(68px, 8.4vw, 132px); position: relative; z-index: 6; }
 h1 span { font-size: .25em; letter-spacing: .5em; }

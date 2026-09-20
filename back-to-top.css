@@ -1,7 +1,7 @@
 /* 返回顶部悬浮按钮 */
 .back-to-top {
   position: fixed;
-  right: 24px;
+  left: 24px;
   bottom: 24px;
   z-index: 90;
   display: grid;
@@ -34,7 +34,7 @@
   transform: translateY(-3px) scale(1.04);
 }
 @media (max-width: 520px) {
-  .back-to-top { right: 14px; bottom: 14px; width: 44px; height: 44px; }
+  .back-to-top { left: 14px; bottom: 14px; width: 44px; height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .back-to-top { transition: none; }
