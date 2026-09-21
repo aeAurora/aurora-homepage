@@ -29,6 +29,63 @@
     if (tabs.length) activate(Math.max(0, tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true')));
   });
 
+  document.querySelectorAll('.film-strip').forEach((strip) => {
+    let pointerId = null;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let dragged = false;
+    let suppressClick = false;
+
+    strip.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startScrollLeft = strip.scrollLeft;
+      dragged = false;
+      strip.setPointerCapture?.(pointerId);
+    });
+
+    strip.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== pointerId) return;
+      const distance = event.clientX - startX;
+      if (!dragged && Math.abs(distance) < 6) return;
+      dragged = true;
+      strip.classList.add('is-dragging');
+      strip.scrollLeft = startScrollLeft - distance;
+      event.preventDefault();
+    });
+
+    const finishDrag = (event) => {
+      if (event.pointerId !== pointerId) return;
+      if (dragged) {
+        suppressClick = true;
+        requestAnimationFrame(() => { suppressClick = false; });
+      }
+      if (strip.hasPointerCapture?.(pointerId)) strip.releasePointerCapture(pointerId);
+      pointerId = null;
+      dragged = false;
+      strip.classList.remove('is-dragging');
+    };
+
+    strip.addEventListener('pointerup', finishDrag);
+    strip.addEventListener('pointercancel', finishDrag);
+    strip.addEventListener('lostpointercapture', () => {
+      pointerId = null;
+      dragged = false;
+      strip.classList.remove('is-dragging');
+    });
+    strip.addEventListener('click', (event) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
+    strip.addEventListener('wheel', (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      strip.scrollLeft += event.deltaY;
+      event.preventDefault();
+    }, { passive: false });
+  });
+
   const audio = document.querySelector('[data-music-audio]');
   const vinyl = document.querySelector('[data-vinyl]');
   const deck = document.querySelector('[data-music-deck]');

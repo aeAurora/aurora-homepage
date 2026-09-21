@@ -789,6 +789,17 @@ section { padding: 104px 0; }
   transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
 }
 .interest-node span { font-size: clamp(13px, 2vw, 20px); font-weight: 900; line-height: 1.2; letter-spacing: .02em; }
+html[lang="en"] .interest-node { padding: 10px 7px; }
+html[lang="en"] .interest-node span {
+  max-width: 100%;
+  font-size: clamp(9px, 1.45vw, 13px);
+  line-height: 1.08;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+html[lang="en"] .interest-orbit-center strong { font-size: clamp(14px, 2.3vw, 24px); letter-spacing: 0; }
+html[lang="en"] .interest-orbit-center small { max-width: 82%; font-size: clamp(8px, 1vw, 10px); line-height: 1.2; }
 .interest-node:hover,
 .interest-node:focus-visible { transform: translate(-50%, -50%) scale(1.1); filter: brightness(1.12); outline: none; box-shadow: 0 0 0 2px #fff, 0 0 46px var(--node-color); }
 .interest-node-1 { --node-color: #ff5d6c; left: 50%; top: 8%; }
@@ -803,6 +814,10 @@ section { padding: 104px 0; }
   .interest-orbit { width: min(430px, 92vw); margin-left: 50%; transform: translateX(-50%); }
   .interest-node { width: 23%; border-width: 3px; padding: 7px; }
   .interest-node span { font-size: clamp(11px, 3.5vw, 15px); }
+  html[lang="en"] .interest-node { padding: 6px 4px; }
+  html[lang="en"] .interest-node span { font-size: clamp(8px, 2.5vw, 11px); line-height: 1.05; }
+  html[lang="en"] .interest-orbit-center strong { font-size: clamp(12px, 4vw, 18px); }
+  html[lang="en"] .interest-orbit-center small { font-size: clamp(7px, 2.2vw, 9px); }
   .interest-orbit-center { width: 34%; }
 }
 @media (prefers-reduced-motion: reduce) {
