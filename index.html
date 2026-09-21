@@ -1165,6 +1165,13 @@
     .project-art { border-radius:2px;background:radial-gradient(circle at 68% 30%,rgba(239,143,197,.18),transparent 23%),linear-gradient(135deg,transparent 49.7%,rgba(121,207,255,.28) 50%,transparent 50.3%),repeating-linear-gradient(90deg,transparent 0 55px,rgba(183,215,242,.05) 56px),#080d15; }
     .project-art::after { content:"V2.5 / 2026"; }
     .contact { border-radius:2px;background:radial-gradient(circle at 20% 30%,rgba(121,207,255,.12),transparent 32%),radial-gradient(circle at 80% 50%,rgba(239,143,197,.12),transparent 30%),rgba(7,11,18,.86); }
+    .contact .email-link { color:#f7fbff;background:rgba(5,9,16,.82);font-weight:800; }
+    .contact .email-link--tju { border-color:#79cfff;box-shadow:5px 5px 0 rgba(121,207,255,.22),0 0 20px rgba(121,207,255,.1); }
+    .contact .email-link--polyu { border-color:#ef8fc5;box-shadow:5px 5px 0 rgba(239,143,197,.22),0 0 20px rgba(239,143,197,.1); }
+    .contact .email-link--personal { color:#e8ffac;border-color:#baff39;box-shadow:5px 5px 0 rgba(186,255,57,.2),0 0 20px rgba(186,255,57,.09); }
+    .contact .email-link--tju:hover { color:#071018;background:#79cfff;box-shadow:7px 7px 0 rgba(121,207,255,.28); }
+    .contact .email-link--polyu:hover { color:#180711;background:#ef8fc5;box-shadow:7px 7px 0 rgba(239,143,197,.28); }
+    .contact .email-link--personal:hover { color:#0b1103;background:#baff39;box-shadow:7px 7px 0 rgba(186,255,57,.26); }
     .dw-avatar { border-radius:2px;background:var(--signal); }
     @keyframes signalDrift { to { transform:rotate(360deg); } }
     @keyframes stagePulse { 50% { opacity:.72;transform:scale(.985); } }
@@ -1476,9 +1483,9 @@
         <h2>一起见证成长</h2>
         <p>欢迎通过学校邮箱或私人邮箱联系我，也欢迎针对我的作品提出反馈与讨论。</p>
         <div class="actions cta" style="justify-content:center;">
-          <a class="btn btn-primary" href="mailto:zhaoxinyao_080311@tju.edu.cn">zhaoxinyao_080311@tju.edu.cn</a>
-          <a class="btn btn-ghost" href="mailto:xinyao-aurora.zhao@connect.polyu.hk">xinyao-aurora.zhao@connect.polyu.hk</a>
-          <a class="btn btn-ghost" href="mailto:2296354158@qq.com">2296354158@qq.com</a>
+          <a class="btn email-link email-link--tju" href="mailto:zhaoxinyao_080311@tju.edu.cn">zhaoxinyao_080311@tju.edu.cn</a>
+          <a class="btn email-link email-link--polyu" href="mailto:xinyao-aurora.zhao@connect.polyu.hk">xinyao-aurora.zhao@connect.polyu.hk</a>
+          <a class="btn email-link email-link--personal" href="mailto:2296354158@qq.com">2296354158@qq.com</a>
         </div>
       </div>
     </section>
