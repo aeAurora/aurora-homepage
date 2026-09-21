@@ -6,7 +6,7 @@
   var canvas = document.getElementById('avatarScratchCanvas');
   if (!stage || !reveal || !canvas) return;
 
-  var context = canvas.getContext('2d', { willReadFrequently: true });
+  var context = canvas.getContext('2d');
   if (!context) return;
 
   var controls = Array.prototype.slice.call(stage.querySelectorAll('[data-avatar-action]'));
@@ -18,6 +18,8 @@
   var checkTimer = 0;
   var cssWidth = 0;
   var cssHeight = 0;
+  var sampleCanvas = document.createElement('canvas');
+  var sampleContext = sampleCanvas.getContext('2d', { willReadFrequently: true });
 
   function lockControls(locked) {
     controls.forEach(function (button) {
@@ -81,15 +83,18 @@
   }
 
   function scratchedPercentage() {
-    var pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    if (!sampleContext) return 0;
+    var sampleWidth = Math.max(1, Math.min(180, Math.round(cssWidth / 3)));
+    var sampleHeight = Math.max(1, Math.round(sampleWidth * cssHeight / Math.max(1, cssWidth)));
+    sampleCanvas.width = sampleWidth;
+    sampleCanvas.height = sampleHeight;
+    sampleContext.clearRect(0, 0, sampleWidth, sampleHeight);
+    sampleContext.drawImage(canvas, 0, 0, sampleWidth, sampleHeight);
+    var pixels = sampleContext.getImageData(0, 0, sampleWidth, sampleHeight).data;
     var transparent = 0;
-    var sampled = 0;
-    var step = Math.max(12, Math.floor((window.devicePixelRatio || 1) * 14));
-    for (var y = 0; y < canvas.height; y += step) {
-      for (var x = 0; x < canvas.width; x += step) {
-        sampled += 1;
-        if (pixels[(y * canvas.width + x) * 4 + 3] < 32) transparent += 1;
-      }
+    var sampled = pixels.length / 4;
+    for (var index = 3; index < pixels.length; index += 4) {
+      if (pixels[index] < 32) transparent += 1;
     }
     return sampled ? transparent / sampled * 100 : 0;
   }
@@ -175,7 +180,7 @@
   drawCover();
 })();
 
-import('./avatar-3d-rotate.js?v=3.5.9').catch(function (error) {
+import('./avatar-3d-rotate.js?v=3.7.0').catch(function (error) {
   console.error('Unable to start the 3D avatar:', error);
   var loading = document.getElementById('avatarLoading');
   var loadingText = loading && loading.querySelector('b');

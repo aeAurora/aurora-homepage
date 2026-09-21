@@ -36,9 +36,78 @@ body::before {
 }
 a { color: inherit; }
 .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
-.topbar {
+.detail-dock {
   position: sticky;
   top: 0;
+  z-index: 30;
+  border-bottom: 1px solid var(--line);
+  background: rgba(2, 5, 10, .82);
+  backdrop-filter: blur(18px);
+}
+.detail-dock-inner {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 74px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.detail-dock-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  flex: 0 0 auto;
+  color: var(--text);
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-decoration: none;
+}
+.detail-dock-brand em { color: #c8d0dc; font-style: normal; }
+.detail-dock-spark {
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 6px;
+  color: #10131f;
+  background: conic-gradient(from 210deg, #fff, #7f8998, #f6d6e9, #91e9f7, #fff);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 0 16px rgba(255,158,216,.4);
+  font: 900 11px/1 Georgia, serif;
+}
+.detail-dock-links { display: flex; align-items: center; gap: 22px; }
+.detail-dock-links a {
+  position: relative;
+  isolation: isolate;
+  padding: 7px 9px;
+  color: #f4f6fb;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  text-shadow: 0 1px #05070c, -1px 0 7px rgba(126,231,255,.4), 1px 0 8px rgba(255,111,210,.34);
+}
+.detail-dock-links a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .86;
+  border: 1px solid rgba(224,236,255,.48);
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+  background: linear-gradient(112deg, rgba(255,255,255,.48), rgba(90,108,138,.22) 18%, rgba(84,57,132,.38) 43%, rgba(182,219,238,.42) 62%, rgba(247,191,229,.36) 78%, rgba(65,75,105,.34));
+  box-shadow: inset 0 1px rgba(255,255,255,.55), inset 0 -1px rgba(19,24,38,.8), 0 0 12px rgba(141,157,255,.16);
+  transition: opacity .2s ease, filter .2s ease, transform .2s ease;
+}
+.detail-dock-links a:hover,
+.detail-dock-links a:focus-visible { color: #fff; outline: none; }
+.detail-dock-links a:hover::before,
+.detail-dock-links a:focus-visible::before { opacity: 1; filter: brightness(1.35) saturate(1.2); transform: translateY(-1px); }
+.detail-dock-links .detail-dock-contact::before {
+  background: linear-gradient(112deg, #eaf4fa, #73808f 14%, #47375f 40%, #a8d6df 58%, #d38fbf 74%, #44495c 88%, #f7fbff);
+}
+.topbar {
+  position: sticky;
+  top: 74px;
   z-index: 20;
   border-bottom: 1px solid var(--line);
   background: rgba(3, 5, 10, .78);
@@ -124,6 +193,23 @@ h2 { margin: 12px 0 24px; font-size: clamp(30px, 4.7vw, 48px); line-height: 1.18
 .lightbox-index { position: fixed; left: 24px; bottom: 20px; color: var(--muted); font: 800 12px/1.4 ui-monospace, monospace; letter-spacing: .1em; }
 
 @media (max-width: 800px) {
+  .detail-dock-inner {
+    width: 100%;
+    min-height: auto;
+    display: block;
+    padding: 10px 14px 9px;
+  }
+  .detail-dock-brand { margin-bottom: 9px; }
+  .detail-dock-brand em { font-size: 13px; }
+  .detail-dock-links {
+    gap: 10px;
+    overflow-x: auto;
+    padding: 2px 1px 7px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(126,231,255,.42) transparent;
+  }
+  .detail-dock-links a { flex: 0 0 auto; padding: 6px 8px; font-size: 11px; }
+  .topbar { top: 116px; }
   .story-layout { grid-template-columns: 1fr; }
   .side { order: -1; }
   .side-card { position: static; }
@@ -134,8 +220,9 @@ h2 { margin: 12px 0 24px; font-size: clamp(30px, 4.7vw, 48px); line-height: 1.18
 }
 @media (max-width: 560px) {
   .wrap { width: min(100% - 28px, 1080px); }
-  .nav { min-height: 62px; }
-  .next-link { display: none; }
+  .nav { min-height: 62px; flex-wrap: wrap; gap: 6px 14px; padding-block: 10px; }
+  .back, .next-link { font-size: 12px; }
+  .next-link { display: inline-flex; margin-left: auto; text-align: right; }
   .hero { min-height: auto; padding: 72px 0 54px; }
   h1 { font-size: clamp(42px, 14vw, 65px); }
   .story-layout { padding: 58px 0 80px; }

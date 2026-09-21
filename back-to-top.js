@@ -39,7 +39,7 @@
 
   if (!document.querySelector('script[data-flower-pet]')) {
     var flowerScript = document.createElement('script');
-    flowerScript.src = 'flower-png-pet.js?v=2.1.0';
+    flowerScript.src = 'flower-png-pet-v22.js?v=2.2.0';
     flowerScript.setAttribute('data-flower-pet', '');
     document.body.appendChild(flowerScript);
   }

@@ -172,19 +172,42 @@
   cursor: pointer;
 }
 .feedback-image-note { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; }
+.feedback-image-preview-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 9px;
+}
+.feedback-image-preview-list[hidden] { display: none; }
 .feedback-image-preview {
-  position: relative;
-  margin-top: 8px;
-  width: min(100%, 220px);
+  min-width: 0;
+  overflow: hidden;
   border: 1px solid rgba(135, 175, 205, .3);
   background: rgba(2, 5, 10, .74);
 }
-.feedback-image-preview[hidden] { display: none; }
-.feedback-image-preview img { display: block; width: 100%; max-height: 130px; object-fit: cover; }
+.feedback-image-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.feedback-image-preview-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px;
+}
+.feedback-image-preview-footer span {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .feedback-image-preview button {
-  position: absolute;
-  top: 6px;
-  right: 6px;
+  flex: 0 0 auto;
   padding: 5px 8px;
   border: 1px solid rgba(255, 143, 209, .45);
   color: #fff;
@@ -197,11 +220,17 @@
   color: #c8f7ff;
   font-size: 10px;
 }
-.comment-image-link { display: block; margin-top: 12px; }
+.comment-image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.comment-image-link { display: block; min-width: 0; }
 .comment-image {
   display: block;
   width: 100%;
-  max-height: 220px;
+  height: 150px;
   border: 1px solid rgba(135, 175, 205, .24);
   object-fit: cover;
 }

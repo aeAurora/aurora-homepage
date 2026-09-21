@@ -17,27 +17,42 @@
   const themeName = Object.keys(themes).find((name) => root.classList.contains(name));
   const theme = themes[themeName];
   let scrollFrame = 0;
+  let pageVisible = !document.hidden;
 
   const updateScroll = () => {
     scrollFrame = 0;
+    if (!pageVisible) return;
     root.style.setProperty('--scroll-y', `${window.scrollY}px`);
   };
 
   updateScroll();
   window.addEventListener('scroll', () => {
-    if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
+    if (pageVisible && !scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
   }, { passive: true });
 
   document.querySelectorAll('.bookmark, .gallery-button').forEach((card) => {
     if (reducedMotion || !finePointer) return;
-    card.addEventListener('pointermove', (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
+    let rect = null;
+    let pointerEvent = null;
+    let tiltFrame = 0;
+    const renderTilt = () => {
+      tiltFrame = 0;
+      if (!pointerEvent || !rect || !pageVisible) return;
+      const x = (pointerEvent.clientX - rect.left) / rect.width - 0.5;
+      const y = (pointerEvent.clientY - rect.top) / rect.height - 0.5;
       card.style.setProperty('--tilt-x', `${x * 4}deg`);
       card.style.setProperty('--tilt-y', `${y * -4}deg`);
-    });
+    };
+    card.addEventListener('pointerenter', () => { rect = card.getBoundingClientRect(); });
+    card.addEventListener('pointermove', (event) => {
+      pointerEvent = event;
+      if (!tiltFrame) tiltFrame = requestAnimationFrame(renderTilt);
+    }, { passive: true });
     card.addEventListener('pointerleave', () => {
+      if (tiltFrame) cancelAnimationFrame(tiltFrame);
+      tiltFrame = 0;
+      rect = null;
+      pointerEvent = null;
       card.style.setProperty('--tilt-x', '0deg');
       card.style.setProperty('--tilt-y', '0deg');
     });
@@ -89,9 +104,22 @@
   }
 
   let pointer = null;
+  let pendingPointer = null;
+  let cursor = null;
   let renderFrame = 0;
   const renderParticles = () => {
     renderFrame = 0;
+    if (!pageVisible) return;
+    if (pendingPointer) {
+      pointer = pendingPointer;
+      pendingPointer = null;
+      root.style.setProperty('--mx', `${pointer.x}px`);
+      root.style.setProperty('--my', `${pointer.y}px`);
+      root.style.setProperty('--pointer-x', ((pointer.x / innerWidth) - 0.5).toFixed(3));
+      root.style.setProperty('--pointer-y', ((pointer.y / innerHeight) - 0.5).toFixed(3));
+      root.style.setProperty('--ambient-angle', `${((pointer.x / innerWidth) - 0.5) * 3}deg`);
+      if (cursor) cursor.style.transform = `translate3d(${pointer.x}px, ${pointer.y}px, 0)`;
+    }
     const width = window.innerWidth;
     const height = window.innerHeight;
     const pointerX = pointer ? pointer.x / width - 0.5 : 0;
@@ -121,7 +149,7 @@
   };
 
   const requestRender = () => {
-    if (!renderFrame) renderFrame = requestAnimationFrame(renderParticles);
+    if (pageVisible && !renderFrame) renderFrame = requestAnimationFrame(renderParticles);
   };
 
   if (!reducedMotion) {
@@ -130,25 +158,20 @@
   }
 
   if (!reducedMotion && finePointer) {
-    const cursor = document.createElement('span');
+    cursor = document.createElement('span');
     cursor.className = 'ambient-cursor';
     cursor.setAttribute('aria-hidden', 'true');
     root.append(cursor);
 
     window.addEventListener('pointermove', (event) => {
-      pointer = { x: event.clientX, y: event.clientY };
-      root.style.setProperty('--mx', `${event.clientX}px`);
-      root.style.setProperty('--my', `${event.clientY}px`);
-      root.style.setProperty('--pointer-x', ((event.clientX / innerWidth) - 0.5).toFixed(3));
-      root.style.setProperty('--pointer-y', ((event.clientY / innerHeight) - 0.5).toFixed(3));
-      root.style.setProperty('--ambient-angle', `${((event.clientX / innerWidth) - 0.5) * 3}deg`);
-      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+      pendingPointer = { x: event.clientX, y: event.clientY };
       cursor.classList.add('is-visible');
       requestRender();
     }, { passive: true });
 
     document.documentElement.addEventListener('mouseleave', () => {
       pointer = null;
+      pendingPointer = null;
       cursor.classList.remove('is-visible');
       requestRender();
     });
@@ -170,6 +193,20 @@
       }
     });
   }
+
+  document.addEventListener('visibilitychange', () => {
+    pageVisible = !document.hidden;
+    root.classList.toggle('ambient-paused', !pageVisible);
+    if (!pageVisible) {
+      if (scrollFrame) cancelAnimationFrame(scrollFrame);
+      if (renderFrame) cancelAnimationFrame(renderFrame);
+      scrollFrame = 0;
+      renderFrame = 0;
+      return;
+    }
+    updateScroll();
+    requestRender();
+  });
 
   renderParticles();
 })();

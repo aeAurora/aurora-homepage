@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Aurora 的文字随笔书签，记录感受、思考与那些不愿被磨灭的瞬间。"><title>Aurora｜文字随笔</title>
-  <link rel="stylesheet" href="about-detail.css?v=1.1">
-  <link rel="stylesheet" href="interest-experiences.css?v=1.0">
-  <link rel="stylesheet" href="interest-ambient.css?v=2.0">
+  <link rel="stylesheet" href="about-detail.css?v=1.2">
+  <link rel="stylesheet" href="interest-experiences.css?v=1.2">
+  <link rel="stylesheet" href="interest-ambient.css?v=2.2">
   <style>
     body.bookmark-open{overflow:hidden}.writing-library{padding:82px 0 110px}.library-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:34px}.library-head h2{margin-bottom:0}.library-note{max-width:430px;margin:0;color:var(--muted)}.bookmark-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,22px)}.bookmark{position:relative;min-width:0;aspect-ratio:2/3.35;border:0;padding:0;color:inherit;background:transparent;cursor:pointer;perspective:1000px;text-align:left}.bookmark::after{content:"";position:absolute;left:50%;bottom:-9px;width:42%;height:18px;background:var(--bookmark-accent,var(--pink));clip-path:polygon(0 0,50% 100%,100% 0);transform:translateX(-50%);opacity:.88}.bookmark-inner{position:absolute;inset:0;overflow:hidden;border:1px solid rgba(203,224,244,.3);background:linear-gradient(150deg,color-mix(in srgb,var(--bookmark-accent,var(--pink)) 18%,transparent),transparent 38%),rgba(8,13,22,.96);box-shadow:0 20px 50px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.09);transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}.bookmark:hover .bookmark-inner,.bookmark:focus-visible .bookmark-inner{transform:translateY(-8px) rotateX(2deg);border-color:var(--bookmark-accent,var(--pink));box-shadow:0 28px 70px rgba(0,0,0,.48)}.bookmark:focus-visible{outline:2px solid var(--cyan);outline-offset:8px}.bookmark-front{height:100%;display:flex;flex-direction:column;padding:clamp(19px,2.5vw,28px) clamp(17px,2vw,24px)}.bookmark-index{color:var(--bookmark-accent,var(--pink));font:800 10px/1.5 ui-monospace,Consolas,monospace;letter-spacing:.14em}.bookmark-title{margin:auto 0;font-size:clamp(22px,2.6vw,34px);line-height:1.22;letter-spacing:-.04em;writing-mode:vertical-rl;align-self:center;max-height:70%}.bookmark-meta{color:var(--muted);font-size:11px;letter-spacing:.08em}.bookmark-open-hint{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;color:#e7f5ff;font-size:12px;font-weight:800}.bookmark-open-hint::after{content:"↻";color:var(--bookmark-accent,var(--cyan));font-size:18px}.bookmark:nth-child(4n+1){--bookmark-accent:#ff8fd1}.bookmark:nth-child(4n+2){--bookmark-accent:#7ee7ff}.bookmark:nth-child(4n+3){--bookmark-accent:#a58aff}.bookmark:nth-child(4n+4){--bookmark-accent:#f5c56f}.future-note{margin-top:32px;padding:22px 24px;border:1px dashed rgba(184,211,239,.24);color:var(--muted);background:rgba(255,255,255,.02)}
     .reader{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:clamp(16px,4vw,52px);background:rgba(1,2,6,.9);backdrop-filter:blur(18px);opacity:1;transition:opacity .24s ease}.reader[hidden]{display:none}.reader.is-entering{opacity:0}.reader-card{position:relative;width:min(820px,94vw);height:min(86vh,880px);perspective:1500px}.reader-card-inner{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(0);transition:transform .65s cubic-bezier(.2,.75,.2,1)}.reader.is-entering .reader-card-inner{transform:rotateY(-180deg) scale(.55)}.reader-back{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(208,228,247,.38);background:linear-gradient(145deg,rgba(255,143,209,.09),transparent 30%),linear-gradient(180deg,#0d1420,#080c14);box-shadow:0 40px 120px #000;backface-visibility:hidden}.reader-head{flex:0 0 auto;padding:clamp(24px,4vw,42px) clamp(24px,5vw,54px) 24px;border-bottom:1px solid var(--line)}.reader-label{color:var(--pink);font:800 11px/1.5 ui-monospace,Consolas,monospace;letter-spacing:.14em}.reader-title{max-width:650px;margin:12px 52px 0 0;font-size:clamp(30px,5vw,52px);line-height:1.15;letter-spacing:-.045em}.reader-close{position:absolute;z-index:2;top:20px;right:20px;width:44px;height:44px;border:1px solid var(--line);color:#fff;background:rgba(3,5,10,.76);cursor:pointer;font-size:24px}.reader-close:hover,.reader-close:focus-visible{border-color:var(--cyan);color:var(--cyan);outline:none}.reader-body{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:30px clamp(24px,5vw,54px) 58px;scrollbar-color:rgba(126,231,255,.48) transparent}.reader-body p{margin:0 0 1.35em;color:#d0d8e5;font-size:clamp(16px,2vw,18px);line-height:1.95}.reader-body p:last-child{margin-bottom:0}.reader-body .closing{color:#fff;font-size:clamp(18px,2.4vw,22px)}.reader-instruction{margin:0;padding:12px 24px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;text-align:center;letter-spacing:.06em}.essay-source{display:none}
@@ -13,11 +13,23 @@
   </style>
 </head>
 <body class="interest-writing">
+    <header class="detail-dock">
+    <nav class="detail-dock-inner" aria-label="主导航">
+      <a class="detail-dock-brand" href="index.html#top"><span class="detail-dock-spark">Z</span><em>Aurora · 赵昕瑶</em></a>
+      <div class="detail-dock-links">
+        <a href="index.html#about">关于我</a>
+        <a href="index.html#project">作品</a>
+        <a href="index.html#interests">兴趣</a>
+        <a href="index.html#feedback">留言</a>
+        <a class="detail-dock-contact" href="index.html#contact">联系我</a>
+      </div>
+    </nav>
+  </header>
   <header class="topbar"><nav class="nav wrap" aria-label="页面导航"><a class="back" href="index.html#interests">返回兴趣坐标</a><a class="next-link" href="interest-reading.html">继续浏览：阅读 →</a></nav></header>
   <main>
-    <header class="hero wrap"><div class="kicker">INTEREST / WRITING · PERSONAL ESSAYS</div><h1>唯有文字能担此任，<br><span class="gradient-text">宣告生命曾经在场。</span></h1><p class="lede">我写下那些真实发生过的感受，也收拢某一刻的犹疑、欢喜与思考。它们未必能替生活找到答案，却能让转瞬即逝的经历留下痕迹。时间始终向前，许多声音终会沉入记忆深处，而文字替我保存彼时的目光与心绪，证明我曾抵达这里，曾被世界触动，也曾如此具体地生活过。</p><div class="signal-row" aria-label="写作关键词"><span>文字</span><span>生命</span><span>感受</span><span>存在</span><span>记忆</span></div></header>
+    <header class="hero wrap"><div class="kicker">INTEREST / WRITING · PERSONAL ESSAYS</div><h1>唯有文字能担此任，<br><span class="gradient-text">宣告生命曾经在场。</span></h1><p class="lede">文字替我留住转瞬即逝的感受，也证明我曾如此具体地生活过。</p><div class="signal-row" aria-label="写作关键词"><span>文字</span><span>生命</span><span>感受</span><span>存在</span><span>记忆</span></div></header>
     <section class="writing-library wrap" aria-labelledby="essay-library-title">
-      <div class="library-head"><div><div class="kicker">ESSAY BOOKMARKS / 05</div><h2 id="essay-library-title">把每一篇文字，夹进时间里。</h2></div><p class="library-note">每张书签都保存着一段完整的文字。点击正面的标题，翻到背面阅读；关闭后，它会回到书架原来的位置。</p></div>
+      <div class="library-head"><div><div class="kicker">ESSAY BOOKMARKS / 05</div><h2 id="essay-library-title">把每一篇文字，夹进时间里。</h2></div><p class="library-note">点击书签，翻面阅读完整文字。</p></div>
       <div class="bookmark-grid">
         <button class="bookmark" type="button" data-essay="heroism" aria-haspopup="dialog" aria-controls="essay-reader"><span class="bookmark-inner"><span class="bookmark-front"><span class="bookmark-index">ESSAY 01 / HEROISM</span><strong class="bookmark-title">成为我自己，是我青春时期的英雄主义</strong><span class="bookmark-meta">自我 · 青春 · 英雄主义</span><span class="bookmark-open-hint">点击翻面阅读</span></span></span></button>
         <button class="bookmark" type="button" data-essay="seventeen" aria-haspopup="dialog" aria-controls="essay-reader"><span class="bookmark-inner"><span class="bookmark-front"><span class="bookmark-index">ESSAY 02 / SEVENTEEN</span><strong class="bookmark-title">写给十七岁的最后一封信</strong><span class="bookmark-meta">成长 · 时间 · 记忆</span><span class="bookmark-open-hint">点击翻面阅读</span></span></span></button>
@@ -25,7 +37,7 @@
         <button class="bookmark" type="button" data-essay="door" aria-haspopup="dialog" aria-controls="essay-reader"><span class="bookmark-inner"><span class="bookmark-front"><span class="bookmark-index">ESSAY 04 / THE DOOR</span><strong class="bookmark-title">谢谢那个勇敢推门的人</strong><span class="bookmark-meta">喜剧 · 女性 · 表达</span><span class="bookmark-open-hint">点击翻面阅读</span></span></span></button>
         <button class="bookmark" type="button" data-essay="chinese-class" aria-haspopup="dialog" aria-controls="essay-reader"><span class="bookmark-inner"><span class="bookmark-front"><span class="bookmark-index">ESSAY 05 / CHINESE</span><strong class="bookmark-title">语文结课有感</strong><span class="bookmark-meta">语文 · 记忆 · 生长</span><span class="bookmark-open-hint">点击翻面阅读</span></span></span></button>
       </div>
-      <div class="future-note">书架会继续延伸。以后每一篇完整随笔，都会成为一张可以翻开的新书签。</div>
+      <div class="future-note">书架会继续延伸。</div>
     </section>
     <div class="essay-source" aria-hidden="true">
       <article id="essay-heroism" data-label="ESSAY 01 / SELF · YOUTH · HEROISM" data-title="成为我自己，是我青春时期的英雄主义"><p>比起抬头去追随那些明亮的人们，我更喜欢低头去问自己的心，问自己真正想要的是什么。</p><p>不一定非要站在聚光灯下，不一定非要拿到所有奖项，不一定非要让所有人都喜欢你、理解你。</p><p>我喜欢自己的所有：明媚的、黯淡的，被喜欢的、被讨厌的，滔滔不绝的、沉默寡言的，聚光灯下表演的、坐在台前鼓掌的。</p><p>不是所有事情都要争个输赢对错。我是我人生的主角，每个错误的选择，都是必不可少的起伏。所有的问题，主角光环会带我找到答案。</p><p class="closing">“我是我自己永恒的战友，不再渴望成为另一个人。这是我笨拙的英雄主义。”</p><p>我与我周旋久，宁作我。</p></article>
@@ -38,6 +50,6 @@
   <div class="reader" id="essay-reader" role="dialog" aria-modal="true" aria-labelledby="reader-title" hidden><div class="reader-card"><div class="reader-card-inner"><article class="reader-back"><button class="reader-close" type="button" aria-label="合上书签">×</button><header class="reader-head"><div class="reader-label" id="reader-label"></div><h2 class="reader-title" id="reader-title"></h2></header><div class="reader-body" id="reader-body" tabindex="0"></div><p class="reader-instruction">点击关闭按钮或背景空白处，或按 Esc 合上书签</p></article></div></div></div>
   <footer class="page-footer"><div class="footer-row wrap"><span>© <span id="year"></span> Aurora · 赵昕瑶</span><a href="interest-reading.html">继续阅读：阅读 →</a></div></footer>
   <script src="interest-writing.js?v=1.0"></script>
-<script src="interest-ambient.js?v=2.0"></script>
+<script src="interest-ambient.js?v=2.1"></script>
 </body>
 </html>

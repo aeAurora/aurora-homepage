@@ -1298,12 +1298,12 @@
         <div class="avatar-controls" aria-label="人物动作控制">
           <button type="button" data-avatar-action="afraid" data-label="害怕" data-label-en="Afraid">害怕</button>
           <button type="button" data-avatar-action="dance_02" data-label="舞蹈二" data-label-en="Dance 02">舞蹈 02</button>
-          <button type="button" data-avatar-action="angry_01" data-label="生气一" data-label-en="Angry 01">生气 01</button>
+          <button type="button" data-avatar-action="cast_a_spell" data-label="施法" data-label-en="Cast a spell">施法</button>
           <button type="button" data-avatar-action="agree" data-label="赞同" data-label-en="Agree">赞同</button>
-          <button type="button" data-avatar-action="heart_pose" data-label="比心" data-label-en="Heart pose">比心</button>
+          <button type="button" data-avatar-action="flip" data-label="空翻" data-label-en="Flip">空翻</button>
           <button type="button" data-avatar-action="dance_01" data-label="舞蹈一" data-label-en="Dance 01">舞蹈 01</button>
           <button type="button" data-avatar-action="bow" data-label="鞠躬" data-label-en="Bow">鞠躬</button>
-          <button type="button" data-avatar-action="laugh_02" data-label="大笑" data-label-en="Laugh">大笑</button>
+          <button type="button" data-avatar-action="greet_04" data-label="问候" data-label-en="Greeting">问候</button>
         </div>
         <div class="avatar-size-control" aria-label="人物大小调节">
           <label for="avatarSize"><span>人物大小</span> <output id="avatarSizeValue" for="avatarSize">100%</output></label>
@@ -1389,9 +1389,8 @@
     <section id="interests" class="container reveal">
       <div class="section-heading">
         <h2>兴趣坐标</h2>
-        <p>舞台与文字、故事与影像、运动与动手创造，共同构成了学习之外真实而具体的我。</p>
+        <p>七种热爱，从不同方向拼成学习之外的我。</p>
       </div>
-      <p class="interest-intro">舞台、文字、书影音、运动与亲手创造，是我感受世界的七种方式。它们颜色不同，却共同围成了完整的我。</p>
       <div class="interest-orbit" aria-label="七种兴趣组成的彩虹圆环">
         <div class="interest-orbit-center" aria-hidden="true"><span>MY</span><strong>INTERESTS</strong><small>七种热爱 · 一个我</small></div>
         <a class="interest-node interest-node-1" href="interest-stage.html"><span>舞台表现</span></a>
@@ -1453,13 +1452,10 @@
             <textarea id="feedbackContent" name="content" rows="4" minlength="2" maxlength="1000" required placeholder="写下你的建议、想法或希望交流的内容……"></textarea>
             <div class="feedback-meta"><span>请勿填写密码等敏感信息</span><span id="feedbackCount">0 / 1000</span></div>
             <div class="feedback-image-field">
-              <label for="feedbackImage">添加图片 <small>（选填，单张，最大 10 MB）</small></label>
-              <input id="feedbackImage" name="image" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
-              <div class="feedback-image-preview" id="feedbackImagePreview" hidden>
-                <img id="feedbackImagePreviewImg" alt="待上传图片预览">
-                <button id="feedbackImageRemove" type="button">移除图片</button>
-              </div>
-              <small class="feedback-image-note">JPG、PNG、WebP 或 GIF；静态图片会在上传前压缩，图片仅随公开留言上传。</small>
+              <label for="feedbackImage">添加图片 <small>（选填，最多 5 张，每张最大 10 MB）</small></label>
+              <input id="feedbackImage" name="images" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+              <div class="feedback-image-preview-list" id="feedbackImagePreview" hidden aria-live="polite"></div>
+              <small class="feedback-image-note">可分多次继续选择；JPG、PNG、WebP 或 GIF。静态图片会在上传前压缩，图片仅随公开留言上传。</small>
             </div>
             <label for="feedbackContact">联系方式 <small>（选填，仅我可见）</small></label>
             <input id="feedbackContact" name="contact" type="text" maxlength="200" placeholder="邮箱或其他方便联系你的方式">
@@ -1925,14 +1921,54 @@
     })();
   </script>
   <button class="back-to-top" id="backToTop" type="button" aria-label="返回顶部" title="返回顶部">↑</button>
-  <script src="back-to-top.js"></script>
-  <script src="language-toggle.js"></script>
-  <script src="supabase-config.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="feedback.js?v=3.5.8"></script>
-  <script src="hyper-text.js"></script>
-  <script src="identity-logo-rotate.js?v=3.5.2"></script>
-  <script src="emotion-intro.js?v=1.1.0"></script>
-  <script src="scratch-avatar.js?v=3.5.9"></script>
+  <script src="back-to-top.js" defer></script>
+  <script src="language-toggle.js" defer></script>
+  <script>
+    (function () {
+      var feedbackSection = document.getElementById('feedback');
+      if (!feedbackSection) return;
+      var started = false;
+      var observer = null;
+
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+          var script = document.createElement('script');
+          script.src = src;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+
+      function startFeedback() {
+        if (started) return;
+        started = true;
+        if (observer) observer.disconnect();
+        loadScript('supabase-config.js')
+          .then(function () { return loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'); })
+          .then(function () { return loadScript('feedback-v4.js?v=4.0.1'); })
+          .catch(function (error) {
+            console.error('留言模块加载失败：', error);
+            var status = document.getElementById('commentsStatus');
+            if (status) status.textContent = '评论区暂时无法加载，请稍后重试。';
+          });
+      }
+
+      feedbackSection.addEventListener('focusin', startFeedback, { once: true });
+      feedbackSection.addEventListener('pointerdown', startFeedback, { once: true, passive: true });
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver(function (entries) {
+          if (entries.some(function (entry) { return entry.isIntersecting; })) startFeedback();
+        }, { rootMargin: '600px 0px' });
+        observer.observe(feedbackSection);
+      } else {
+        window.addEventListener('load', startFeedback, { once: true });
+      }
+    })();
+  </script>
+  <script src="hyper-text.js" defer></script>
+  <script src="identity-logo-rotate.js?v=3.5.2" defer></script>
+  <script src="emotion-intro.js?v=1.1.0" defer></script>
+  <script src="scratch-avatar.js?v=3.7.1" defer></script>
 </body>
 </html>

@@ -11,7 +11,6 @@
 
     prose.classList.add('chapter-deck');
     layout.classList.add('has-chapter-deck');
-    layout.classList.add('has-chapter-deck');
     const consoleEl = document.createElement('section');
     consoleEl.className = 'chapter-console';
     consoleEl.setAttribute('aria-label', label);
@@ -236,8 +235,26 @@
     thoughts[0].setAttribute('aria-pressed', 'true');
   }
 
+  function initRevealGates() {
+    document.querySelectorAll('[data-reveal-target]').forEach((button) => {
+      const target = document.getElementById(button.dataset.revealTarget);
+      if (!target) return;
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!expanded));
+        button.querySelector('span').textContent = expanded ? button.dataset.openLabel : button.dataset.closeLabel;
+        button.querySelector('b').textContent = expanded ? '＋' : '−';
+        target.hidden = expanded;
+        if (!expanded) {
+          window.setTimeout(() => target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }), 40);
+        }
+      });
+    });
+  }
+
   const studyDeck = createChapterDeck('study-page', '学习章节', typeChapter);
   const innerDeck = createChapterDeck('inner-page', '内心档案');
   initRoute();
   initPortrait(innerDeck);
+  initRevealGates();
 })();

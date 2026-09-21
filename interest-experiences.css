@@ -12,6 +12,69 @@ body.interest-sports{--sport:#b7ff48;background:linear-gradient(110deg,#030600,#
 body.interest-writing{background:radial-gradient(circle at 16% 25%,rgba(255,143,209,.13),transparent 30rem),#06050a}.interest-writing .hero{border-bottom-style:dashed}.interest-writing .writing-library{position:relative}.interest-writing .writing-library::before{content:"PRIVATE ARCHIVE";position:absolute;right:0;top:34px;color:rgba(255,255,255,.035);font:900 clamp(48px,10vw,130px)/1 sans-serif;pointer-events:none}
 body.interest-diy{background:radial-gradient(circle at 50% 25%,rgba(126,231,255,.1),transparent 30rem),#05070a}.interest-diy .gallery-section{border-top:1px dashed rgba(126,231,255,.22)}
 
+
+/* Each reflection opens through an object belonging to its page, not a generic text button. */
+.interest-notes{--object-accent:var(--page-accent,var(--cyan));max-width:760px;margin:24px 0 0}
+.interest-notes summary{position:relative;display:grid;grid-template-columns:132px minmax(0,1fr);align-items:center;gap:20px;min-height:112px;padding:10px 18px 10px 8px;overflow:hidden;border:1px solid color-mix(in srgb,var(--object-accent) 35%,transparent);color:var(--object-accent);background:color-mix(in srgb,var(--object-accent) 5%,transparent);cursor:pointer;list-style:none;isolation:isolate;transition:border-color .3s ease,background .3s ease,transform .3s ease}
+.interest-notes summary::-webkit-details-marker{display:none}
+.interest-notes summary:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.interest-notes summary:hover{border-color:color-mix(in srgb,var(--object-accent) 72%,transparent);transform:translateY(-2px)}
+.interest-object-art{position:relative;display:block;width:116px;height:88px;justify-self:center;transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease}
+.interest-object-label{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+.interest-object-label small{font:800 9px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.18em;opacity:.68}
+.interest-object-label strong{font-family:inherit;font-size:clamp(17px,2.2vw,24px);font-weight:900;line-height:1.15;letter-spacing:-.025em}
+.interest-object-label .label-open,.interest-notes[open] .label-closed{display:none}
+.interest-notes[open] .label-open{display:block}
+.interest-notes-body{position:relative;margin-top:0;padding:24px clamp(18px,4vw,36px);border:1px solid color-mix(in srgb,var(--object-accent) 28%,transparent);border-top:0;background:color-mix(in srgb,var(--object-accent) 7%,rgba(4,7,12,.88));animation:notes-arrive .38s ease both}
+.interest-notes-body>:first-child{margin-top:0}
+.interest-notes-body>:last-child{margin-bottom:0}
+@keyframes notes-arrive{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+
+/* Stage: a real lamp head, stand and cone of light. */
+.interest-notes--spotlight{--object-accent:#ff4fa3}
+.interest-notes--spotlight summary{min-height:150px;background:radial-gradient(ellipse at 46px 44px,rgba(255,255,255,.24),transparent 12px),linear-gradient(105deg,rgba(255,79,163,.12),transparent 62%)}
+.interest-notes--spotlight summary::before{content:"";position:absolute;z-index:-1;left:70px;top:35px;width:280px;height:150px;background:linear-gradient(100deg,rgba(255,244,214,.18),rgba(255,79,163,.035) 75%,transparent);clip-path:polygon(0 43%,100% 0,100% 100%,0 57%);opacity:.22;transform:scaleX(.3);transform-origin:left center;transition:.48s ease}
+.interest-notes--spotlight .interest-object-art::before{content:"";position:absolute;left:20px;top:10px;width:68px;height:42px;border:2px solid #ffd7e9;border-radius:52% 18% 18% 52%;background:radial-gradient(circle at 20% 50%,#fff 0 8%,#ffb8d7 9% 23%,#631839 24% 100%);box-shadow:0 0 22px rgba(255,79,163,.55);transform:rotate(-12deg)}
+.interest-notes--spotlight .interest-object-art::after{content:"";position:absolute;left:65px;top:48px;width:4px;height:38px;background:#ffd7e9;box-shadow:-20px 35px 0 -1px #ffd7e9,20px 35px 0 -1px #ffd7e9;transform:rotate(-5deg);transform-origin:top}
+.interest-notes--spotlight[open] summary::before{opacity:1;transform:scaleX(1)}
+.interest-notes--spotlight[open] .interest-object-art{filter:drop-shadow(0 0 18px rgba(255,79,163,.75));transform:rotate(7deg)}
+.interest-notes--spotlight .interest-notes-body{background:radial-gradient(ellipse at 20% 0,rgba(255,225,178,.13),transparent 62%),rgba(13,5,11,.94)}
+
+/* Reading: a clothbound book with a paper note sliding out. */
+.interest-notes--book{--object-accent:#715740}
+.interest-notes--book summary{border-color:rgba(73,54,39,.32);color:#715740;background:rgba(113,87,64,.065)}
+.interest-notes--book .interest-object-art::before{content:"";position:absolute;left:15px;top:15px;width:84px;height:58px;border:1px solid #614832;border-left:9px solid #806247;border-radius:3px 8px 8px 3px;background:linear-gradient(90deg,#b99d79 0 4%,#e0cfad 4% 94%,#baa17c 94%);box-shadow:8px 10px 0 rgba(82,57,37,.24),13px 17px 22px rgba(49,35,25,.25);transform:rotate(-5deg)}
+.interest-notes--book .interest-object-art::after{content:"NOTES";position:absolute;left:48px;top:22px;width:48px;height:62px;padding:8px 5px;color:#73593f;background:repeating-linear-gradient(#fff9e9 0 11px,#cfc0a6 12px);box-shadow:0 7px 12px rgba(63,45,31,.22);font:800 7px/1 ui-monospace,monospace;letter-spacing:.1em;transform:translateY(17px) rotate(2deg);transition:.45s ease}
+.interest-notes--book[open] .interest-object-art::after{transform:translate(24px,-15px) rotate(7deg)}
+.interest-notes--book[open] .interest-object-art{transform:rotate(-3deg)}
+.interest-notes--book .interest-notes-body{border-color:rgba(73,54,39,.28);color:#44392f;background:repeating-linear-gradient(#f0e6d0 0 31px,#d9ccb2 32px);font-family:Georgia,"Songti SC",serif}
+
+/* Movies: a clapperboard that snaps open and reveals director notes. */
+.interest-notes--clapper{--object-accent:var(--movie)}
+.interest-notes--clapper summary{background:linear-gradient(100deg,rgba(255,207,91,.09),transparent 60%)}
+.interest-notes--clapper .interest-object-art::before{content:"";position:absolute;left:12px;top:29px;width:94px;height:51px;border:2px solid #e8ddc5;background:repeating-linear-gradient(0deg,#121212 0 15px,#262626 16px 17px);box-shadow:8px 10px 22px #000}
+.interest-notes--clapper .interest-object-art::after{content:"";position:absolute;left:9px;top:14px;width:100px;height:18px;border:2px solid #e8ddc5;background:repeating-linear-gradient(120deg,#eee7d5 0 14px,#111 15px 29px);transform:rotate(-10deg);transform-origin:left bottom;transition:.35s ease}
+.interest-notes--clapper[open] .interest-object-art::after{transform:rotate(7deg)}
+.interest-notes--clapper[open] .interest-object-art{filter:drop-shadow(0 0 12px rgba(255,207,91,.35));transform:translateY(3px)}
+.interest-notes--clapper .interest-notes-body{background:linear-gradient(180deg,rgba(255,207,91,.06),transparent),#080808}
+
+/* Sports: a bright checkpoint bib with track markings. */
+.interest-notes--checkpoint{--object-accent:var(--sport)}
+.interest-notes--checkpoint summary{background:repeating-linear-gradient(90deg,rgba(183,255,72,.035) 0 28px,transparent 29px 56px)}
+.interest-notes--checkpoint .interest-object-art::before{content:"GO";position:absolute;left:17px;top:9px;display:grid;place-items:center;width:80px;height:70px;border:3px solid #15200b;border-radius:8px;color:#142006;background:var(--sport);box-shadow:0 0 0 4px rgba(183,255,72,.2),9px 10px 0 #10180a;font:1000 29px/1 ui-monospace,monospace;letter-spacing:-.08em;transform:rotate(-4deg)}
+.interest-notes--checkpoint .interest-object-art::after{content:"01  •  CHECK";position:absolute;left:29px;top:60px;color:#142006;font:900 7px/1 ui-monospace,monospace;letter-spacing:.08em;transform:rotate(-4deg)}
+.interest-notes--checkpoint[open] .interest-object-art{filter:drop-shadow(0 0 13px rgba(183,255,72,.48));transform:translateX(8px) rotate(4deg)}
+.interest-notes--checkpoint .interest-notes-body{background:linear-gradient(90deg,rgba(183,255,72,.08),transparent),rgba(5,10,3,.95)}
+
+/* Music: a liner note physically slides from a record sleeve. */
+.interest-notes--liner{--object-accent:var(--music);margin-top:18px}
+.interest-notes--liner summary{background:linear-gradient(110deg,rgba(146,255,220,.1),transparent 66%)}
+.interest-notes--liner .interest-object-art::before{content:"";position:absolute;left:12px;top:9px;width:78px;height:78px;border:1px solid rgba(146,255,220,.55);background:linear-gradient(140deg,rgba(146,255,220,.3),rgba(5,12,10,.96) 62%);box-shadow:9px 10px 25px #000}
+.interest-notes--liner .interest-object-art::after{content:"SIDE A\A 01 — MEMORY";white-space:pre;position:absolute;left:40px;top:18px;width:66px;height:70px;padding:12px 7px;color:#0d271f;background:#d8fff2;box-shadow:4px 7px 14px #000;font:900 7px/1.7 ui-monospace,monospace;letter-spacing:.08em;transform:translateX(-10px) rotate(1deg);transition:.45s ease}
+.interest-notes--liner[open] .interest-object-art::after{transform:translateX(28px) rotate(5deg)}
+.interest-notes--liner[open] .interest-object-art{filter:drop-shadow(0 0 12px rgba(146,255,220,.38))}
+.interest-notes--liner .interest-notes-body{background:linear-gradient(135deg,rgba(146,255,220,.11),transparent),rgba(4,10,8,.94)}
+
 @media(max-width:800px){.stage-panel,.stage-panel--essay,.music-deck{grid-template-columns:1fr}.stage-gallery{grid-template-columns:repeat(4,1fr)}.reading-hero{grid-template-columns:1fr}.reading-stack{height:210px}.shelf-nav{grid-template-columns:repeat(2,1fr)}.sport-station{grid-template-columns:60px 1fr}.sport-photo{grid-column:2}.playlist-groups{grid-template-columns:1fr}}
-@media(max-width:560px){.stage-console,.reading-library,.cinema-program,.playlist-board,.track{padding-top:48px;padding-bottom:76px}.stage-gallery{grid-template-columns:repeat(2,1fr)}.stage-panel{padding-top:30px}.reading-stack{height:160px}.reading-spine{width:38px;padding:12px 8px;font-size:11px}.shelf-nav{display:flex;overflow-x:auto}.shelf-button{flex:0 0 150px}.reading-card{padding:42px 24px}.film-ticket{flex-basis:82vw}.screen{min-height:520px;padding:54px 22px 30px}.quote-frame{grid-template-columns:1fr;gap:5px}.music-deck{padding:50px 0}.sport-station{grid-template-columns:48px 1fr;padding-left:18px}.sport-photo{grid-column:1/-1}.sport-copy{grid-column:2}.sport-index{font-size:34px}}
-@media(prefers-reduced-motion:reduce){.vinyl.is-playing,.is-audible .equalizer i{animation:none}.shelf-button,.sport-photo img{transition:none}}
+@media(max-width:560px){.stage-console,.reading-library,.cinema-program,.playlist-board,.track{padding-top:48px;padding-bottom:76px}.stage-gallery{grid-template-columns:repeat(2,1fr)}.stage-panel{padding-top:30px}.reading-stack{height:160px}.reading-spine{width:38px;padding:12px 8px;font-size:11px}.shelf-nav{display:flex;overflow-x:auto}.shelf-button{flex:0 0 150px}.reading-card{padding:42px 24px}.film-ticket{flex-basis:82vw}.screen{min-height:520px;padding:54px 22px 30px}.quote-frame{grid-template-columns:1fr;gap:5px}.music-deck{padding:50px 0}.sport-station{grid-template-columns:48px 1fr;padding-left:18px}.sport-photo{grid-column:1/-1}.sport-copy{grid-column:2}.sport-index{font-size:34px}.interest-notes summary{grid-template-columns:96px minmax(0,1fr);gap:10px;min-height:104px;padding-left:2px}.interest-notes--spotlight summary{min-height:126px}.interest-object-art{width:92px;transform:scale(.82)}.interest-object-label strong{font-size:16px}.interest-notes--spotlight summary::before{left:50px;width:210px}.interest-notes-body{padding:20px 18px}}
+@media(prefers-reduced-motion:reduce){.vinyl.is-playing,.is-audible .equalizer i{animation:none}.shelf-button,.sport-photo img,.interest-notes summary,.interest-object-art,.interest-object-art::after,.interest-notes--spotlight summary::before{transition:none}.interest-notes-body{animation:none}}

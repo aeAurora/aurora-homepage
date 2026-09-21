@@ -13,7 +13,7 @@ const controls = stage ? Array.from(stage.querySelectorAll('[data-avatar-action]
 
 if (stage && viewport && canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.08;
@@ -165,7 +165,7 @@ if (stage && viewport && canvas) {
   });
 
   new GLTFLoader().load(
-    'assets/aurora-animated.glb',
+    'assets/aurora-new-lite.glb',
     (gltf) => {
       const model = gltf.scene;
       model.traverse((node) => {
